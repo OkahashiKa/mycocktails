@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "myCocktails-ng"
+    }
+  },
+  "defaultProject": "myCocktails-ng",
+  "cli": {
+    "analytics": "29dc97ba-5344-445f-9e32-1b03e2d7212f"
+  }
 }
