@@ -1,7 +1,7 @@
 <h3>My Material List</h3>
 <table class="materials">
 <tr>
-    <th>ID</th><th>名称</th><th></th>
+    <th>ID</th><th>Name</th><th></th>
 </tr>
 <tr *ngFor="let material of materials">
     <td>{{material.id}}</td>
@@ -13,13 +13,13 @@
     </td>
 </tr>
 </table>
-<button class="btn btn-secondary" (click)="serachCocktails()">検索</button>
+<button class="btn btn-secondary" (click)="serachCocktails()">Search</button>
 
 <div *ngIf="result">
     <h2>serachResult</h2>
     <table class="materials">
         <tr>
-            <th>ID</th><th>名称</th><th></th>
+            <th>ID</th><th>Name</th><th></th>
         </tr>
         <tr *ngFor="let material of result">
             <td>{{material.id}}</td>

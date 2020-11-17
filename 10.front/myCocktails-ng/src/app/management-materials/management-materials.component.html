@@ -1,1 +1,18 @@
-<p>management-materials works!</p>
+<h2>Management Materials</h2>
+<table class="materials">
+    <tr>
+        <th>ID</th><th>Name</th><th></th><th></th>
+    </tr>
+    <tr *ngFor="let material of materials">
+        <td>{{material.id}}</td>
+        <td>{{material.name}}</td>
+        <td>
+            <button lass="btn btn-secondary" (click)="updateMaterials(material.id)">edit</button>
+        </td>
+        <td>
+            <button lass="btn btn-secondary" (click)="deleteMaterials(material.id)">delete</button>
+        </td>
+    </tr>
+</table>
+
+<button lass="btn btn-secondary" (click)="createMaterials(material.id)">create</button>
