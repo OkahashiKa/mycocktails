@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { material } from '../material';
+import { MaterialService } from '../material.service';
 
 @Component({
   selector: 'app-management-materials',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagementMaterialsComponent implements OnInit {
 
-  constructor() { }
+  materials: material[];
+
+  constructor(
+    private materialService: MaterialService
+  ) { }
 
   ngOnInit(): void {
+    this.materialService.getMaterials().
+      subscribe(materials => this.materials = materials);
   }
 
+  updateMaterials(id: number): void {
+    // TODO: implement update materials.
+  }
+
+  deleteMaterials(id: number): void {
+    // TODO: implement delete materials.
+  }
+
+  createMaterials(): void {
+    // TODO: implement create materials.
+  }
 }
