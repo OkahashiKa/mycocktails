@@ -20,15 +20,15 @@ export class ManagementMaterialsComponent implements OnInit {
       subscribe(materials => this.materials = materials);
   }
 
-  updateMaterials(id: number): void {
+  updateMaterial(id: number): void {
     // TODO: implement update materials.
   }
 
-  deleteMaterials(id: number): void {
+  deleteMaterial(id: number): void {
     // TODO: implement delete materials.
   }
 
-  createMaterials(): void {
+  createMaterial(): void {
     // TODO: implement create materials.
   }
 }
