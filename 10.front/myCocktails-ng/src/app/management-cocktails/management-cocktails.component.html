@@ -1,1 +1,21 @@
-<p>management-cocktails works!</p>
+<h2>Management Cocktails</h2>
+<table class="cocktails">
+    <tr>
+        <th>ID</th><th>Name</th><th></th><th></th><th></th>
+    </tr>
+    <tr *ngFor="let cocktail of cocktails">
+        <td>{{cocktail.id}}</td>
+        <td>{{cocktail.name}}</td>
+        <td>
+            <button lass="btn btn-secondary" (click)="cocktailsDetail(cocktail.id)">detail</button>
+        </td>
+        <td>
+            <button lass="btn btn-secondary" (click)="updateCocktail(cocktail.id)">edit</button>
+        </td>
+        <td>
+            <button lass="btn btn-secondary" (click)="deleteCocktail(cocktail.id)">delete</button>
+        </td>
+    </tr>
+</table>
+
+<button lass="btn btn-secondary" (click)="createCocktail()">create</button>
