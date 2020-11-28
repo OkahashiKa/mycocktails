@@ -8,7 +8,11 @@ import { CocktailService } from '../cocktail.service';
   styleUrls: ['./management-cocktails.component.css']
 })
 export class ManagementCocktailsComponent implements OnInit {
+
   cocktails: cocktail[];
+
+  displayedColumns: string[] = ['select', 'id', 'name', 'base', 'edit'];
+  dataSource: cocktail[];
 
   constructor(
     private cocktailService: CocktailService
@@ -16,7 +20,10 @@ export class ManagementCocktailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cocktailService.getCocktails().
-      subscribe(cocktails => this.cocktails = cocktails);
+      subscribe(cocktails => {
+        this.cocktails = cocktails
+        this.dataSource = cocktails
+      });
   }
 
   cocktailDetail(): void {
