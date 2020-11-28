@@ -1,8 +1,6 @@
-BEGIN TRANSACTION
-
 CREATE TABLE m_material_category (
     id INTEGER NOT NULL,
-    name VARCHAR(100),
+    name NVARCHAR(100),
     create_at DATETIME,
     update_at DATETIME,
     PRIMARY KEY(id)
@@ -10,7 +8,7 @@ CREATE TABLE m_material_category (
 
 CREATE TABLE m_material (
     id INTEGER NOT NULL,
-    name VARCHAR(100),
+    name NVARCHAR(100),
     category_id INTEGER NOT NULL,
     create_at DATETIME,
     update_at DATETIME,
@@ -20,8 +18,7 @@ CREATE TABLE m_material (
 
 CREATE TABLE m_cocktail (
     id INTEGER NOT NULL,
-    name VARCHAR(100),
-    alcohol_content INTEGER,
+    name NVARCHAR(100),
     create_at DATETIME,
     update_at DATETIME,
     PRIMARY KEY(id)
