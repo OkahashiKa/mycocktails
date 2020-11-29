@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { SearchCocktailsComponent } from './search-cocktails/search-cocktails.component';
-import { ManagementCocktailsComponent } from './management-cocktails/management-cocktails.component';
-import { ManagementMaterialsComponent } from './management-materials/management-materials.component';
+import { MainComponent } from './component/main/main.component';
+import { SearchCocktailsComponent } from './component/search-cocktails/search-cocktails.component';
+import { ManagementCocktailsComponent } from './component/management-cocktails/management-cocktails.component';
+import { ManagementMaterialsComponent } from './component/management-materials/management-materials.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },

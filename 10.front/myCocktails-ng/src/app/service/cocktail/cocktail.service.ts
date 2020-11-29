@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { cocktail } from './cocktail';
-import { COCKTAILS } from './moc-cocktails';
+import { cocktail } from '../../cocktail';
+import { COCKTAILS } from '../../moc-cocktails';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

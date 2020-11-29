@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { cocktail } from '../cocktail';
-import { CocktailService } from '../cocktail.service';
+import { cocktail } from '../../cocktail';
+import { CocktailService } from '../../service/cocktail/cocktail.service';
 
 @Component({
   selector: 'app-management-cocktails',
