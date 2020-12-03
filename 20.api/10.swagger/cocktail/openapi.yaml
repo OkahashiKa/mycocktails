@@ -1,0 +1,191 @@
+openapi: 3.0.1
+info:
+  title: Cocktail API
+  description: カクテルの情報を管理するAPI
+  contact:
+    email: okarians.302.dev@gmail.com
+  version: 0.1.0
+servers:
+  - url: 'https://release.com/api/v1/cocktail'
+    description: Release server
+  - url: 'http://localhost/api/v1/cocktail'
+    description: Local server
+tags:
+  - name: GetCocktail
+    description: カクテルの取得
+  - name: CreateCocktail
+    description: カクテルの登録
+  - name: UpdateCocktail
+    description: カクテルの更新
+  - name: DeleteCocktail
+    description: カクテルの削除
+
+paths:
+  /Cocktail:
+    get:
+      tags:
+        - GetCocktail
+      summary: カクテルの情報をID指定で取得する
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: cocktailId
+          description: カクテルID
+          required: true
+          schema:
+            $ref: '#/components/schemas/CocktailId'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetCocktailResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /CocktaiList:
+    get:
+      tags:
+        - GetCocktail
+      summary: カクテルの情報を全件取得する
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/GetCocktailListResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /Cocktai:
+    post:
+      tags:
+        - CreateCocktail
+      summary: カクテルの情報を登録する
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: カクテル登録リクエストボディ
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailDetailModel'
+      responses:
+        '201':
+          $ref: '#/components/responses/CreateCocktailResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+components:
+  responses:
+    GetCocktailResponce:
+      description: カクテル取得レスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CocktailModel'
+    GetCocktailListResponce:
+      description: カクテルリスト取得レスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CocktailListModel'
+    CreateCocktailResponce:
+      description: カクテル登録レスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+    400Model:
+      description: リクエストエラー
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: Validation_Error
+            msg: リクエストの形式が不正です
+    401Model:
+      description: 認証エラー
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: Authentication_ERROR
+            msg: 認証に失敗しました 
+    409Model:
+      description: データが取得できなかった場合
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: DATA_INCONSITENCY
+            msg: データ不整合のため、突合情報検索に失敗しました
+    500Model:
+      description: サーバーエラー
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: SERVER_ERROR
+            msg: サーバーエラー
+  schemas:
+    CommonFailureModel:
+      $ref: '../components/CommonFailureModel.yaml'
+    CocktailModel:
+      description: カクテルの情報
+      type: object
+      properties:
+        cocktailId:
+          $ref: '#/components/schemas/CocktailId'
+        cocktailName:
+          $ref: '#/components/schemas/CocktailName'
+    CocktailListModel:
+      description: カクテルの情報リスト
+      type: array
+      items:
+        $ref: '#/components/schemas/CocktailModel'
+    CocktailDetailModel:
+      properties:
+        cocktailId:
+          $ref: '#/components/schemas/CocktailId'
+        cocktailName:
+          $ref: '#/components/schemas/CocktailName'
+        materialIdList:
+          description: 材料IDリスト
+          type: array
+          items:
+            type: integer
+            description: 材料ID
+            example: 1
+
+    # 以下、複数モデルで使用する共通部品
+    CocktailId:
+      description: カクテルID
+      type: integer
+      format: integer
+      example: 1
+    CocktailName:
+      description: カクテル名
+      type: string
+      format: string
+      example: ジントニック
+  
+security:
+  - MapManagerAuth: [] 

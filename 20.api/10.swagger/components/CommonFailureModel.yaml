@@ -1,0 +1,19 @@
+description: 共通処理失敗時の応答電文
+type: object
+required:
+  - reason
+properties:
+  reason:
+    description: 処理失敗理由の種別
+    type: string
+    enum:
+      - DB_ERROR
+      - DATA_INCONSISTENCY
+      - AUTHENTICATION_ERROR
+      - VALIDATION_ERROR
+      - SYSTEM_ERROR
+    example: DB_ERROR
+  msg:
+    description: 処理失敗メッセージ（オプション）
+    type: string
+    example: "更新処理に失敗しました"
