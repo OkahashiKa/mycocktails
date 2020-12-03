@@ -1,0 +1,9 @@
+{
+    "packageAuthors": "Kazuki okahashi",
+    "useDateTimeOffset": false,
+    "aspnetCoreVersion": 3.1,
+    "useSwashbuckle": false,
+    "useDefaultRouting": false,
+    "buildTarget": "library",
+    "isLibrary": true
+  }
