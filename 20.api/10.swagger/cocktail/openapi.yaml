@@ -1,0 +1,282 @@
+openapi: 3.0.1
+info:
+  title: Cocktail API
+  description: API to manage cocktail info.
+  contact:
+    email: okarians.302.dev@gmail.com
+  version: 0.1.0
+servers:
+  - url: 'https://release.com/api/v1/cocktail'
+    description: Release server
+  - url: 'http://localhost/api/v1/cocktail'
+    description: Local server
+tags:
+  - name: Cocktail
+    description: CRUD API for cocktail info.
+  - name: Material
+    description: CRUD API for material info.
+
+paths:
+  /Cocktail/{id}:
+    get:
+      tags:
+        - Cocktail
+      summary: Get cocktail info by id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Cocktail id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CocktailId'
+      responses:
+        '200':
+          $ref: '#/components/responses/CocktailGetResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+    put:
+      tags:
+        - Cocktail
+      summary: Update cocktail info by id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Cocktail id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CocktailId'
+      requestBody:
+        description: Update cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailDetailModel'
+      responses:
+        '201':
+          $ref: '#/components/responses/CocktailPutResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+    delete:
+      tags:
+        - Cocktail
+      summary: Delete cocktail info by id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Cocktail id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CocktailId'
+      responses:
+        '204':
+          $ref: '#/components/responses/CocktailDeleteResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /Cocktail:
+    get:
+      tags:
+        - Cocktail
+      summary: Get cocktail info list.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/CocktailListGetResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+    post:
+      tags:
+        - Cocktail
+      summary: Resist cocktail info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Resist cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailDetailModel'
+      responses:
+        '201':
+          $ref: '#/components/responses/CocktailPostResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+    delete:
+      tags:
+        - Cocktail
+      summary: delete maltiple cocktail info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Delete cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailIdList'
+      responses:
+        '204':
+          $ref: '#/components/responses/CocktailDeleteResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+components:
+  responses:
+    CocktailGetResponce:
+      description: Get cocktail info response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CocktailModel'
+    CocktailPostResponce:
+      description: Resist cocktail info response.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+    CocktailPutResponce:
+      description: Update cocktail info response.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+    CocktailDeleteResponce:
+      description: Delete cocktail info response.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+    CocktailListGetResponce:
+      description: Get cocktail info list response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CocktailList'
+    400Model:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: Validation_Error
+            msg: リクエストの形式が不正です
+    401Model:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: Authentication_ERROR
+            msg: 認証に失敗しました 
+    409Model:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: DATA_INCONSITENCY
+            msg: データ不整合のため、突合情報検索に失敗しました
+    500Model:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonFailureModel'
+          example:
+            reason: SERVER_ERROR
+            msg: サーバーエラー
+  schemas:
+    CommonFailureModel:
+      $ref: '../components/CommonFailureModel.yaml'
+    CocktailModel:
+      description: Cocktail info model.
+      type: object
+      properties:
+        cocktailId:
+          $ref: '#/components/schemas/CocktailId'
+        cocktailName:
+          $ref: '#/components/schemas/CocktailName'
+    CocktailList:
+      description: Cocktail info list.
+      type: array
+      items:
+        $ref: '#/components/schemas/CocktailModel'
+    CocktailDetailModel:
+      properties:
+        cocktailId:
+          $ref: '#/components/schemas/CocktailId'
+        cocktailName:
+          $ref: '#/components/schemas/CocktailName'
+        materialIdList:
+          description: Material id list.
+          type: array
+          items:
+            type: integer
+            description: Material id.
+            example: 1
+    CocktailIdList:
+      description: Cocktail id list.
+      type: array
+      items:
+        $ref: '#/components/schemas/CocktailId'
+
+    # 以下、複数モデルで使用する共通部品
+    CocktailId:
+      description: Cocktail id
+      type: integer
+      format: integer
+      example: 1
+    CocktailName:
+      description: cocktail name.
+      type: string
+      format: string
+      example: ジントニック
+  
+security:
+  - MapManagerAuth: [] 

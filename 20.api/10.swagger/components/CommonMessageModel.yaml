@@ -1,0 +1,5 @@
+description: 共通応答電文
+type: object
+properties:
+  msg:
+    type: string
