@@ -17,7 +17,7 @@ tags:
     description: CRUD API for material info.
 
 paths:
-  /Cocktail/{id}:
+  /cocktail/{id}:
     get:
       tags:
         - Cocktail
@@ -97,7 +97,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /Cocktail:
+  /cocktail:
     get:
       tags:
         - Cocktail
@@ -118,11 +118,11 @@ paths:
     post:
       tags:
         - Cocktail
-      summary: Resist cocktail info.
+      summary: Create cocktail info.
       security:
         - bearerAuth: []
       requestBody:
-        description: Resist cocktail info request body.
+        description: Create cocktail info request body.
         required: true
         content:
           application/json:
@@ -139,10 +139,61 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-    delete:
+  /cocktail/bulk_create:
+    post:
       tags:
         - Cocktail
-      summary: delete maltiple cocktail info.
+      summary: Delete maltiple cocktail info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Delete cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailList'
+      responses:
+        '204':
+          $ref: '#/components/responses/CocktailDeleteResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /cocktail/bulk_update:
+    post:
+      tags:
+        - Cocktail
+      summary: Delete maltiple cocktail info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Delete cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailList'
+      responses:
+        '204':
+          $ref: '#/components/responses/CocktailDeleteResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /cocktail/bulk_delete:
+    post:
+      tags:
+        - Cocktail
+      summary: Delete maltiple cocktail info.
       security:
         - bearerAuth: []
       requestBody:
@@ -172,7 +223,7 @@ components:
           schema:
             $ref: '#/components/schemas/CocktailModel'
     CocktailPostResponce:
-      description: Resist cocktail info response.
+      description: Create cocktail info response.
       content:
         application/json:
           schema:
