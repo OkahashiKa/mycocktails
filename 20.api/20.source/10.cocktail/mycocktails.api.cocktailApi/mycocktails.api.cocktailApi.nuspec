@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>0.1.1</version>
+    <title>cocktail</title>
+    <authors>Kazuki okahashi</authors>
+    <owners>Kazuki okahashi</owners>
+    <licenseUrl>http://localhost</licenseUrl>
+    <!--
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>mycocktails.api.cocktailApi</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>No Copyright</copyright>
+    <tags>mycocktails.api.cocktailApi</tags>
+  </metadata>
+</package>
