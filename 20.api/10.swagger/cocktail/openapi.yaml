@@ -4,7 +4,7 @@ info:
   description: API to manage cocktail info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.1.1
+  version: 0.1.2
 servers:
   - url: 'https://release.com/api/v1/cocktail'
     description: Release server
