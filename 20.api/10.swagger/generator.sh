@@ -12,6 +12,7 @@ fi
 API_NAME=$1
 
 rm -rf ${PWD}/${API_NAME}/library
+rm -rf ${PWD}/${API_NAME}/api
 
 export VERSION=`grep version ${API_NAME}/openapi.yaml | sed -e "s/version: //" | sed -e "s/ //g"`
 ASP_PACKAGE_BASE=mycocktails.library.
@@ -23,7 +24,14 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:${CLI_VERS
 --additional-properties=packageVersion=${VERSION} \
 --additional-properties=packageName=${ASP_PACKAGE_NAME} \
 --additional-properties=packageTitle=${API_NAME} \
--c /local/build/aspnetcore.json
+-c /local/build/aspnetcore.library.json
 
 dotnet pack ${PWD}/${API_NAME}/library/src/${ASP_PACKAGE_NAME}/${ASP_PACKAGE_NAME}.csproj \
 -p:PackageVersion=${VERSION} -o ${PWD}/Package
+
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:${CLI_VERSION} generate \
+-i /local/${API_NAME}/openapi.yaml -g aspnetcore -o /local/${API_NAME}/api \
+--additional-properties=packageVersion=${VERSION} \
+--additional-properties=packageName=${ASP_PACKAGE_NAME} \
+--additional-properties=packageTitle=${API_NAME} \
+-c /local/build/aspnetcore.json
