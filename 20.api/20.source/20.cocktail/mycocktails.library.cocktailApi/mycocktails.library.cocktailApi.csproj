@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <Description>mycocktails.library.cocktailApi</Description>
+    <Copyright>mycocktails.library.cocktailApi</Copyright>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>mycocktails.library.cocktailApi</AssemblyName>
+    <PackageId>mycocktails.library.cocktailApi</PackageId>
+    <UserSecretsId>b422ca4d-cbaa-490f-8df9-73d3033ed5cf</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />-->
+  </ItemGroup>
+</Project>

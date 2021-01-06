@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace mycocktails.api.cocktailApi.Authentication
+namespace mycocktails.library.cocktailApi.Authentication
 {
     /// <summary>
     /// A requirement that an ApiKey must be present.

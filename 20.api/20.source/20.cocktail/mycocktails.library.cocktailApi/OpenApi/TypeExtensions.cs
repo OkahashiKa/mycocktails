@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace mycocktails.api.cocktailApi.OpenApi
+namespace mycocktails.library.cocktailApi.OpenApi
 {
     /// <summary>
     /// Replacement utilities from Swashbuckle.AspNetCore.SwaggerGen which are not in 5.x
