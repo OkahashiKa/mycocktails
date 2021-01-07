@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace mycocktails.library.cocktailApi.Converters
+namespace mycocktails.api.cocktailApi.Converters
 {
     /// <summary>
     /// Custom string to enum converter

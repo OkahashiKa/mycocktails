@@ -16,15 +16,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using mycocktails.library.cocktailApi.Converters;
+using mycocktails.api.cocktailApi.Converters;
 
-namespace mycocktails.library.cocktailApi.Models
+namespace mycocktails.api.cocktailApi.Models
 { 
     /// <summary>
-    /// Cocktail info model.
+    /// 
     /// </summary>
     [DataContract]
-    public partial class CocktailModel : IEquatable<CocktailModel>
+    public partial class CocktailDetailModel : IEquatable<CocktailDetailModel>
     {
         /// <summary>
         /// Cocktail id
@@ -41,15 +41,23 @@ namespace mycocktails.library.cocktailApi.Models
         public string CocktailName { get; set; }
 
         /// <summary>
+        /// Material id list.
+        /// </summary>
+        /// <value>Material id list.</value>
+        [DataMember(Name="materialIdList", EmitDefaultValue=false)]
+        public List<int> MaterialIdList { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CocktailModel {\n");
+            sb.Append("class CocktailDetailModel {\n");
             sb.Append("  CocktailId: ").Append(CocktailId).Append("\n");
             sb.Append("  CocktailName: ").Append(CocktailName).Append("\n");
+            sb.Append("  MaterialIdList: ").Append(MaterialIdList).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,15 +80,15 @@ namespace mycocktails.library.cocktailApi.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CocktailModel)obj);
+            return obj.GetType() == GetType() && Equals((CocktailDetailModel)obj);
         }
 
         /// <summary>
-        /// Returns true if CocktailModel instances are equal
+        /// Returns true if CocktailDetailModel instances are equal
         /// </summary>
-        /// <param name="other">Instance of CocktailModel to be compared</param>
+        /// <param name="other">Instance of CocktailDetailModel to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CocktailModel other)
+        public bool Equals(CocktailDetailModel other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -95,6 +103,12 @@ namespace mycocktails.library.cocktailApi.Models
                     CocktailName == other.CocktailName ||
                     CocktailName != null &&
                     CocktailName.Equals(other.CocktailName)
+                ) && 
+                (
+                    MaterialIdList == other.MaterialIdList ||
+                    MaterialIdList != null &&
+                    other.MaterialIdList != null &&
+                    MaterialIdList.SequenceEqual(other.MaterialIdList)
                 );
         }
 
@@ -112,6 +126,8 @@ namespace mycocktails.library.cocktailApi.Models
                     hashCode = hashCode * 59 + CocktailId.GetHashCode();
                     if (CocktailName != null)
                     hashCode = hashCode * 59 + CocktailName.GetHashCode();
+                    if (MaterialIdList != null)
+                    hashCode = hashCode * 59 + MaterialIdList.GetHashCode();
                 return hashCode;
             }
         }
@@ -119,12 +135,12 @@ namespace mycocktails.library.cocktailApi.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CocktailModel left, CocktailModel right)
+        public static bool operator ==(CocktailDetailModel left, CocktailDetailModel right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CocktailModel left, CocktailModel right)
+        public static bool operator !=(CocktailDetailModel left, CocktailDetailModel right)
         {
             return !Equals(left, right);
         }

@@ -13,10 +13,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using mycocktails.library.cocktailApi.Attributes;
-using mycocktails.library.cocktailApi.Models;
+using mycocktails.api.cocktailApi.Attributes;
+using mycocktails.api.cocktailApi.Models;
 
-namespace mycocktails.library.cocktailApi.Controllers
+namespace mycocktails.api.cocktailApi.Controllers
 { 
     /// <summary>
     /// 

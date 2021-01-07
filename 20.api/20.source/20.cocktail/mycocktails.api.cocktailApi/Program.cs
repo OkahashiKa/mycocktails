@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace mycocktails.library.cocktailApi
+namespace mycocktails.api.cocktailApi
 {
     /// <summary>
     /// Program

@@ -1,19 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <Description>mycocktails.library.cocktailApi</Description>
-    <Copyright>mycocktails.library.cocktailApi</Copyright>
+    <Description>mycocktails.api.cocktailApi</Description>
+    <Copyright>mycocktails.api.cocktailApi</Copyright>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>mycocktails.library.cocktailApi</AssemblyName>
-    <PackageId>mycocktails.library.cocktailApi</PackageId>
-    <UserSecretsId>b422ca4d-cbaa-490f-8df9-73d3033ed5cf</UserSecretsId>
+    <AssemblyName>mycocktails.api.cocktailApi</AssemblyName>
+    <PackageId>mycocktails.api.cocktailApi</PackageId>
+    <UserSecretsId>facfda98-e1f9-4c2c-83b5-37cb6f86e72f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'OpenAPI' " />
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+    <PackageReference Include="mycocktails.library.cocktailApi" Version="0.1.2" />
   </ItemGroup>
   <ItemGroup>
     <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />-->

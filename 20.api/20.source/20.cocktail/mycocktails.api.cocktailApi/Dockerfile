@@ -11,22 +11,22 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 
 # Copy the code into the container
 WORKDIR /src
-COPY ["src/mycocktails.library.cocktailApi/mycocktails.library.cocktailApi.csproj", "mycocktails.library.cocktailApi/"]
+COPY ["src/mycocktails.api.cocktailApi/mycocktails.api.cocktailApi.csproj", "mycocktails.api.cocktailApi/"]
 
 # NuGet restore
-RUN dotnet restore "mycocktails.library.cocktailApi/mycocktails.library.cocktailApi.csproj"
-COPY ["src/mycocktails.library.cocktailApi/", "mycocktails.library.cocktailApi/"]
+RUN dotnet restore "mycocktails.api.cocktailApi/mycocktails.api.cocktailApi.csproj"
+COPY ["src/mycocktails.api.cocktailApi/", "mycocktails.api.cocktailApi/"]
 
 # Build the API
-WORKDIR "mycocktails.library.cocktailApi"
-RUN dotnet build "mycocktails.library.cocktailApi.csproj" -c Release -o /app/build
+WORKDIR "mycocktails.api.cocktailApi"
+RUN dotnet build "mycocktails.api.cocktailApi.csproj" -c Release -o /app/build
 
 # Publish it
 FROM build AS publish
-RUN dotnet publish "mycocktails.library.cocktailApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "mycocktails.api.cocktailApi.csproj" -c Release -o /app/publish
 
 # Make the final image for publishing
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "mycocktails.library.cocktailApi.dll"]
+ENTRYPOINT ["dotnet", "mycocktails.api.cocktailApi.dll"]

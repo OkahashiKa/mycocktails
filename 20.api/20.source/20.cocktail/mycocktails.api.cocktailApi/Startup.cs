@@ -19,10 +19,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using mycocktails.library.cocktailApi.Authentication;
-using mycocktails.library.cocktailApi.OpenApi;
+using mycocktails.api.cocktailApi.Authentication;
+using mycocktails.api.cocktailApi.OpenApi;
 
-namespace mycocktails.library.cocktailApi
+namespace mycocktails.api.cocktailApi
 {
     /// <summary>
     /// Startup

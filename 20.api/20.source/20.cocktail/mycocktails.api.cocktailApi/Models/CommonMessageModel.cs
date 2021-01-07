@@ -16,9 +16,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using mycocktails.library.cocktailApi.Converters;
+using mycocktails.api.cocktailApi.Converters;
 
-namespace mycocktails.library.cocktailApi.Models
+namespace mycocktails.api.cocktailApi.Models
 { 
     /// <summary>
     /// 共通応答電文
