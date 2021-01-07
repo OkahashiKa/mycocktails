@@ -14,214 +14,18 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using mycocktails.api.cocktailApi.Attributes;
-using mycocktails.api.cocktailApi.Models;
+using mycocktails.library.cocktailApi.Controllers;
+using mycocktails.library.cocktailApi.Models;
 
 namespace mycocktails.api.cocktailApi.Controllers
 { 
     /// <summary>
-    /// 
+    /// Cocktail api controller.
     /// </summary>
     [ApiController]
-    public class CocktailApiController : ControllerBase
-    { 
-        /// <summary>
-        /// Create maltiple cocktail info.
-        /// </summary>
-        /// <param name="cocktailModel">Delete cocktail info request body.</param>
-        /// <response code="201">Create cocktail info response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpPost]
-        [Route("/api/v1/cocktail/cocktail/bulk_create")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailBulkCreatePost([FromBody]List<CocktailModel> cocktailModel)
-        { 
-
-            //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(201, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Delete maltiple cocktail info.
-        /// </summary>
-        /// <param name="requestBody">Delete cocktail info request body.</param>
-        /// <response code="204">Delete cocktail info response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpPost]
-        [Route("/api/v1/cocktail/cocktail/bulk_delete")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailBulkDeletePost([FromBody]List<int> requestBody)
-        { 
-
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(204, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Update maltiple cocktail info.
-        /// </summary>
-        /// <param name="cocktailModel">Delete cocktail info request body.</param>
-        /// <response code="201">Create cocktail info response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpPost]
-        [Route("/api/v1/cocktail/cocktail/bulk_update")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailBulkUpdatePost([FromBody]List<CocktailModel> cocktailModel)
-        { 
-
-            //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(201, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Get cocktail info list.
-        /// </summary>
-        /// <response code="200">Get cocktail info list response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [Route("/api/v1/cocktail/cocktail")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<CocktailModel>))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailGet()
-        { 
-
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(List<CocktailModel>));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"cocktailId\" : 1,\n  \"cocktailName\" : \"ジントニック\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<List<CocktailModel>>(exampleJson)
-            : default(List<CocktailModel>);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Delete cocktail info by id.
-        /// </summary>
-        /// <param name="id">Cocktail id.</param>
-        /// <response code="204">Delete cocktail info response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpDelete]
-        [Route("/api/v1/cocktail/cocktail/{id}")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailIdDelete([FromRoute][Required]int id)
-        { 
-
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(204, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+    public class CocktailController : CocktailApiController
+    {
+        #region Get cocktails.
 
         /// <summary>
         /// Get cocktail info by id.
@@ -240,28 +44,83 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailIdGet([FromRoute][Required]int id)
-        { 
-
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(CocktailModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"cocktailId\" : 1,\n  \"cocktailName\" : \"ジントニック\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CocktailModel>(exampleJson)
-            : default(CocktailModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        public override IActionResult CocktailIdGet([FromRoute][Required] int id)
+        {
+            return null;
         }
+
+        /// <summary>
+        /// Get cocktail info list.
+        /// </summary>
+        /// <response code="200">Get cocktail info list response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [Route("/api/v1/cocktail/cocktail")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 200, type: typeof(List<CocktailModel>))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        public override IActionResult CocktailGet()
+        {
+            return null;
+        }
+
+        #endregion
+
+        #region Create cocktails.
+
+        /// <summary>
+        /// Create cocktail info.
+        /// </summary>
+        /// <param name="cocktailDetailModel">Create cocktail info request body.</param>
+        /// <response code="201">Create cocktail info response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpPost]
+        [Route("/api/v1/cocktail/cocktail")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        public override IActionResult CocktailPost([FromBody] CocktailDetailModel cocktailDetailModel)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Create maltiple cocktail info.
+        /// </summary>
+        /// <param name="cocktailModel">Delete cocktail info request body.</param>
+        /// <response code="201">Create cocktail info response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpPost]
+        [Route("/api/v1/cocktail/cocktail/bulk_create")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        public override IActionResult CocktailBulkCreatePost([FromBody] List<CocktailModel> cocktailModel)
+        {
+            return null;
+        }
+
+        #endregion
+
+        #region Update cocktails.
 
         /// <summary>
         /// Update cocktail info by id.
@@ -281,67 +140,81 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailIdPut([FromRoute][Required]int id, [FromBody]CocktailDetailModel cocktailDetailModel)
-        { 
-
-            //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(201, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        public override IActionResult CocktailIdPut([FromRoute][Required] int id, [FromBody] CocktailDetailModel cocktailDetailModel)
+        {
+            return null;
         }
 
         /// <summary>
-        /// Create cocktail info.
+        /// Update maltiple cocktail info.
         /// </summary>
-        /// <param name="cocktailDetailModel">Create cocktail info request body.</param>
+        /// <param name="cocktailModel">Delete cocktail info request body.</param>
         /// <response code="201">Create cocktail info response.</response>
         /// <response code="400">Bad Request</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="409">Conflict</response>
         /// <response code="500">Internal Server Error</response>
         [HttpPost]
-        [Route("/api/v1/cocktail/cocktail")]
+        [Route("/api/v1/cocktail/cocktail/bulk_update")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
-        public virtual IActionResult CocktailPost([FromBody]CocktailDetailModel cocktailDetailModel)
-        { 
-
-            //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(201, default(CommonMessageModel));
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409, default(CommonFailureModel));
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(CommonFailureModel));
-            string exampleJson = null;
-            exampleJson = "{\n  \"msg\" : \"msg\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CommonMessageModel>(exampleJson)
-            : default(CommonMessageModel);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        public override IActionResult CocktailBulkUpdatePost([FromBody] List<CocktailModel> cocktailModel)
+        {
+            return null;
         }
+
+        #endregion
+
+        #region Delete cocktails.
+
+        /// <summary>
+        /// Delete cocktail info by id.
+        /// </summary>
+        /// <param name="id">Cocktail id.</param>
+        /// <response code="204">Delete cocktail info response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpDelete]
+        [Route("/api/v1/cocktail/cocktail/{id}")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        public override IActionResult CocktailIdDelete([FromRoute][Required] int id)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Delete maltiple cocktail info.
+        /// </summary>
+        /// <param name="requestBody">Delete cocktail info request body.</param>
+        /// <response code="204">Delete cocktail info response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpPost]
+        [Route("/api/v1/cocktail/cocktail/bulk_delete")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        public override IActionResult CocktailBulkDeletePost([FromBody] List<int> requestBody)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }
