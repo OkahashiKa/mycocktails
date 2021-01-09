@@ -28,13 +28,41 @@ namespace mycocktails.api.cocktailApi.Logics
             this.logger = logger;
         }
 
+        #region Get cocktails.
+
         /// <summary>
         /// Get cocktail logic by id.
         /// </summary>
         /// <returns></returns>
         public ApiResponse GetCocktail(int id)
         {
-            return null;
+            var result = new CocktailModel();
+
+            try
+            {
+                result = context.MCocktails
+                    .Where(c => c.Id == id)
+                    .Select(c => new CocktailModel
+                    {
+                        CocktailId = c.Id,
+                        CocktailName = c.Name
+                    })
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Cut out to the common part.
+                CommonFailureModel error = new CommonFailureModel
+                {
+                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
+                    Msg = ex.Message,
+                };
+
+                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
+                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            return new SuccessResponse<CocktailModel>(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -70,5 +98,7 @@ namespace mycocktails.api.cocktailApi.Logics
 
             return new SuccessResponse<List<CocktailModel>>(HttpStatusCode.OK, result);
         }
+
+        #endregion
     }
 }

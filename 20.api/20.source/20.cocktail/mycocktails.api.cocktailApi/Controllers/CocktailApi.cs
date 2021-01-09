@@ -74,12 +74,28 @@ namespace mycocktails.api.cocktailApi.Controllers
             }
 
             //
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                // implement error function.
+                CommonFailureModel error = new CommonFailureModel
+                {
+                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
+                    Msg = "不明なエラーが発生しました",
+                };
+                this.logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message}");
+                result = new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
             }
 
-            return null;
+            this.logger.LogInformation($"StatusCode: {result.StatusCode}");
+            if (result.Success)
+            {
+                ApiResponse<CocktailModel> successResponse = (ApiResponse<CocktailModel>)result;
+                return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
+            }
+            else
+            {
+                ApiResponse<CommonFailureModel> failureResponse = (ApiResponse<CommonFailureModel>)result;
+                return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
+            }
         }
 
         /// <summary>
