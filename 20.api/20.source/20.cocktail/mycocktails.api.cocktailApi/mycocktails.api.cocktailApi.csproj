@@ -1,29 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <Description>mycocktails.api.cocktailApi</Description>
     <Copyright>mycocktails.api.cocktailApi</Copyright>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <OutputType>Library</OutputType>
     <AssemblyName>mycocktails.api.cocktailApi</AssemblyName>
     <PackageId>mycocktails.api.cocktailApi</PackageId>
-    <UserSecretsId>8937f8fd-68cd-4e20-8312-b0fba9ff9fcc</UserSecretsId>
+    <UserSecretsId>facfda98-e1f9-4c2c-83b5-37cb6f86e72f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
-    <PackageReference Include="mycocktails.library.cocktailApi" Version="0.1.1" />
+    <PackageReference Include="mycocktails.library.cocktailApi" Version="0.1.2" />
+    <PackageReference Include="mycocktails.library.entity" Version="0.1.2" />
+    <PackageReference Include="mycocktails.library.common" Version="0.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />-->
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Logics\" />
-    <Folder Include="Logics\Intarfaces\" />
+    <Folder Include="Logics\intarfaces\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

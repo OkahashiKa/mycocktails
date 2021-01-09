@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
 
-namespace garagarapon.api.common.Models
+namespace mycocktails.library.common.Models
 {
     /// <summary>
     /// 　This Class is used when passing data between Controller / Logic.
