@@ -52,14 +52,13 @@ namespace mycocktails.api.cocktailApi.Logics
             catch (Exception ex)
             {
                 // TODO: Cut out to the common part.
-                CommonFailureModel error = new CommonFailureModel
+                CommonMessageModel error = new CommonMessageModel
                 {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = ex.Message,
+                    Msg = ex.Message
                 };
 
-                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
-                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                logger.LogError($"{ex.Message}");
+                return new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
             }
 
             return new SuccessResponse<CocktailModel>(HttpStatusCode.OK, result);
@@ -86,14 +85,13 @@ namespace mycocktails.api.cocktailApi.Logics
             catch(Exception ex)
             {
                 // TODO: Cut out to the common part.
-                CommonFailureModel error = new CommonFailureModel
+                CommonMessageModel error = new CommonMessageModel
                 {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = ex.Message,
+                    Msg = ex.Message
                 };
 
-                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
-                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                logger.LogError($"{error.Msg}");
+                return new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
             }
 
             return new SuccessResponse<List<CocktailModel>>(HttpStatusCode.OK, result);
