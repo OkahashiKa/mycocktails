@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using mycocktails.api.cocktailApi.Models;
 using mycocktails.library.common.Models;
 
 namespace mycocktails.library.common.Logics
@@ -6,38 +8,23 @@ namespace mycocktails.library.common.Logics
     public class LogicCommonMethods
     {
         /// <summary>
-        /// エラーレスポンス生成処理
+        /// Common error response creation class.
         /// </summary>
-        /// <typeparam name="T">ロガークラスのジェネリック型</typeparam>
-        /// <param name="logger">ロガー</param>
-        /// <param name="ex">発生した例外</param>
-        /// <returns>エラーレスポンス</returns>
-        public static ErrorResponse<CommonFailureModel> GenerateErrorResponse<T>(ILogger<T> logger, Exception ex)
+        /// <param name="ex">exception</param>
+        /// <returns>error response</returns>
+        public static ErrorResponse<CommonMessageModel> GenerateErrorResponse(Exception ex)
         {
-            CommonFailureModel error;
+            CommonMessageModel error;
             string errMsg = (ex.InnerException == null) ?
                 $" : {ex.Message}" :
                 $" : {ex.Message} {Environment.NewLine} {ex.InnerException.Message}";
 
-            if (DBErrorNamespaceList.Contains(ex.GetType().Namespace))
+            error = new CommonMessageModel
             {
-                error = new CommonFailureModel
-                {
-                    Reason = CommonFailureModel.ReasonEnum.DBERROREnum,
-                    Msg = "DBエラー" + errMsg,
-                };
-            }
-            else
-            {
-                error = new CommonFailureModel
-                {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = "システムエラー" + errMsg,
-                };
-            }
+                Msg = $"{errMsg}"
+            };
 
-            logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
-            return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            return new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
         }
     }
 }
