@@ -16,15 +16,35 @@ using Newtonsoft.Json;
 using mycocktails.api.cocktailApi.Attributes;
 using mycocktails.library.cocktailApi.Controllers;
 using mycocktails.library.cocktailApi.Models;
+using mycocktails.api.cocktailApi.Logics.intarfaces;
+using Microsoft.Extensions.Logging;
+using mycocktails.library.common.Models;
+using System.Net;
 
 namespace mycocktails.api.cocktailApi.Controllers
-{ 
+{
     /// <summary>
     /// Cocktail api controller.
     /// </summary>
     [ApiController]
     public class CocktailController : CocktailApiController
     {
+        private readonly ICocktailLogic logic;
+        private readonly ILogger<CocktailController> logger;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logic"></param>
+        /// <param name="logger"></param>
+        public CocktailController(
+            ICocktailLogic logic,
+            ILogger<CocktailController> logger)
+        {
+            this.logic = logic;
+            this.logger = logger;
+        }
+
         #region Get cocktails.
 
         /// <summary>
@@ -46,6 +66,19 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
         public override IActionResult CocktailIdGet([FromRoute][Required] int id)
         {
+            ApiResponse result;
+
+            try
+            {
+                result = logic.GetCocktail(id);
+            }
+
+            //
+            catch(Exception ex)
+            {
+                // implement error function.
+            }
+
             return null;
         }
 
@@ -67,7 +100,36 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
         public override IActionResult CocktailGet()
         {
-            return null;
+            ApiResponse result;
+
+            try
+            {
+                result = logic.GetCocktailList();
+            }
+
+            //
+            catch (Exception ex)
+            {
+                CommonFailureModel error = new CommonFailureModel
+                {
+                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
+                    Msg = "不明なエラーが発生しました",
+                };
+                this.logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message}");
+                result = new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            this.logger.LogInformation($"StatusCode: {result.StatusCode}");
+            if (result.Success)
+            {
+                ApiResponse<List<CocktailModel>> successResponse = (ApiResponse<List<CocktailModel>>)result;
+                return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
+            }
+            else
+            {
+                ApiResponse<CommonFailureModel> failureResponse = (ApiResponse<CommonFailureModel>)result;
+                return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
+            }
         }
 
         #endregion

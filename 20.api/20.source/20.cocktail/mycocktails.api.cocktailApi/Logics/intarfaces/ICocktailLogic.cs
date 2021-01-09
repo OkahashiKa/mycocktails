@@ -12,7 +12,7 @@ namespace mycocktails.api.cocktailApi.Logics.intarfaces
         /// Get cocktail logic by id.
         /// </summary>
         /// <returns></returns>
-        public ApiResponse GetCocktail();
+        public ApiResponse GetCocktail(int id);
 
         /// <summary>
         /// Get cocktail list logic.

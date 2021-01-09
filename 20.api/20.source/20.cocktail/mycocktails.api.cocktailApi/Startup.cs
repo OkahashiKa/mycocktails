@@ -21,6 +21,11 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using mycocktails.api.cocktailApi.Authentication;
 using mycocktails.api.cocktailApi.OpenApi;
+using mycocktails.library.entity.Models;
+using Microsoft.EntityFrameworkCore;
+using mycocktails.api.cocktailApi.Models;
+using mycocktails.api.cocktailApi.Logics.intarfaces;
+using mycocktails.api.cocktailApi.Logics;
 
 namespace mycocktails.api.cocktailApi
 {
@@ -33,9 +38,18 @@ namespace mycocktails.api.cocktailApi
         /// Constructor
         /// </summary>
         /// <param name="env"></param>
-        public Startup(IConfiguration configuration)
+        /// <param name="configuration"></param>
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
-            Configuration = configuration;
+            // Modelise appsetting.json.
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("secrets/appsettings.secrets.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         /// <summary>
@@ -62,6 +76,18 @@ namespace mycocktails.api.cocktailApi
                         NamingStrategy = new CamelCaseNamingStrategy()
                     });
                 });
+
+            //DB connetion
+            // directly retrieve setting instead of using strongly-typed options
+            string connectionString = this.Configuration["ConnectionStrings:PostgresConnection"];
+            services.AddDbContext<MyCocktailsDBContext>(options =>
+               options.UseNpgsql(connectionString, o => o.UseNetTopologySuite()));
+
+            // KeyValue set in appsettings.json to entity.
+            services.Configure<AppSettingsConfig>(this.Configuration.GetSection("AppSettings"));
+
+            // DI Logics.
+            addLogic(services);
         }
 
         /// <summary>
@@ -89,6 +115,15 @@ namespace mycocktails.api.cocktailApi
 	            {
 	    	        endpoints.MapControllers();
 	            });
+        }
+
+        /// <summary>
+        /// Add DI logics.
+        /// </summary>
+        /// <param name="services"></param>
+        private void addLogic(IServiceCollection services)
+        {
+            services.AddTransient<ICocktailLogic, CocktailLogic>();
         }
     }
 }

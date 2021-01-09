@@ -1,16 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using Microsoft.Extensions.Logging;
 using mycocktails.api.cocktailApi.Logics.intarfaces;
+using mycocktails.library.cocktailApi.Models;
 using mycocktails.library.common.Models;
+using mycocktails.library.entity.Models;
 
 namespace mycocktails.api.cocktailApi.Logics
 {
     public class CocktailLogic : ICocktailLogic
     {
+        private readonly MyCocktailsDBContext context;
+        private readonly ILogger<CocktailLogic> logger;
+
+        /// <summary>
+        /// Constractor
+        /// </summary>
+        /// <param name="context">DBcontext</param>
+        /// <param name="logger">logger</param>
+        public CocktailLogic(
+            MyCocktailsDBContext context,
+            ILogger<CocktailLogic> logger)
+        {
+            this.context = context;
+            this.logger = logger;
+        }
+
         /// <summary>
         /// Get cocktail logic by id.
         /// </summary>
         /// <returns></returns>
-        public ApiResponse GetCocktail()
+        public ApiResponse GetCocktail(int id)
         {
             return null;
         }
@@ -21,7 +43,32 @@ namespace mycocktails.api.cocktailApi.Logics
         /// <returns></returns>
         public ApiResponse GetCocktailList()
         {
-            return null;
+            var result = new List<CocktailModel>();
+
+            try
+            {
+                result = context.MCocktails
+                    .Select(c => new CocktailModel
+                    {
+                        CocktailId = c.Id,
+                        CocktailName = c.Name
+                    })
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                // TODO: Cut out to the common part.
+                CommonFailureModel error = new CommonFailureModel
+                {
+                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
+                    Msg = ex.Message,
+                };
+
+                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
+                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            return new SuccessResponse<List<CocktailModel>>(HttpStatusCode.OK, result);
         }
     }
 }
