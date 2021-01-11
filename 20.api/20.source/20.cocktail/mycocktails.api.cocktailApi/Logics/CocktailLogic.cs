@@ -5,11 +5,15 @@ using System.Net;
 using Microsoft.Extensions.Logging;
 using mycocktails.api.cocktailApi.Logics.intarfaces;
 using mycocktails.library.cocktailApi.Models;
+using mycocktails.library.common.Logics;
 using mycocktails.library.common.Models;
 using mycocktails.library.entity.Models;
 
 namespace mycocktails.api.cocktailApi.Logics
 {
+    /// <summary>
+    /// Cocktails api logic.
+    /// </summary>
     public class CocktailLogic : ICocktailLogic
     {
         private readonly MyCocktailsDBContext context;
@@ -33,7 +37,7 @@ namespace mycocktails.api.cocktailApi.Logics
         /// <summary>
         /// Get cocktail logic by id.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ApiResponse</returns>
         public ApiResponse GetCocktail(int id)
         {
             var result = new CocktailModel();
@@ -48,18 +52,20 @@ namespace mycocktails.api.cocktailApi.Logics
                         CocktailName = c.Name
                     })
                     .FirstOrDefault();
+
+                // Not found target cocktail by id. 
+                if (result == null)
+                {
+                    // TODO: Constantization of error messages.
+                    string msg = "The target cocktail was not found.";
+                    logger.LogError($"{msg}");
+                    return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
+                }
             }
             catch (Exception ex)
             {
-                // TODO: Cut out to the common part.
-                CommonFailureModel error = new CommonFailureModel
-                {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = ex.Message,
-                };
-
-                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
-                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                logger.LogError((ex.InnerException == null) ? $" : {ex.Message}" : $" : {ex.Message} {Environment.NewLine} {ex.InnerException.Message}");
+                return LogicCommonMethods.GenerateErrorResponse(ex);
             }
 
             return new SuccessResponse<CocktailModel>(HttpStatusCode.OK, result);
@@ -68,13 +74,14 @@ namespace mycocktails.api.cocktailApi.Logics
         /// <summary>
         /// Get cocktail list logic.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ApiResponse</returns>
         public ApiResponse GetCocktailList()
         {
             var result = new List<CocktailModel>();
 
             try
             {
+                // Get cocktail list from DB.
                 result = context.MCocktails
                     .Select(c => new CocktailModel
                     {
@@ -82,18 +89,20 @@ namespace mycocktails.api.cocktailApi.Logics
                         CocktailName = c.Name
                     })
                     .ToList();
+
+                // Cocktail record not found. 
+                if (result.Count() == 0)
+                {
+                    // TODO: Constantization of error messages.
+                    string msg = "There is no cocktail record.";
+                    logger.LogError($"{msg}");
+                    return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
+                }
             }
             catch(Exception ex)
             {
-                // TODO: Cut out to the common part.
-                CommonFailureModel error = new CommonFailureModel
-                {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = ex.Message,
-                };
-
-                logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message} / stacktrace : {ex.StackTrace}");
-                return new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                logger.LogError((ex.InnerException == null) ? $" : {ex.Message}" : $" : {ex.Message} {Environment.NewLine} {ex.InnerException.Message}");
+                return LogicCommonMethods.GenerateErrorResponse(ex);
             }
 
             return new SuccessResponse<List<CocktailModel>>(HttpStatusCode.OK, result);

@@ -20,6 +20,7 @@ using mycocktails.api.cocktailApi.Logics.intarfaces;
 using Microsoft.Extensions.Logging;
 using mycocktails.library.common.Models;
 using System.Net;
+using CommonMessageModel = mycocktails.library.common.Models.CommonMessageModel;
 
 namespace mycocktails.api.cocktailApi.Controllers
 {
@@ -60,10 +61,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/{id}")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 200, type: typeof(CocktailModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailIdGet([FromRoute][Required] int id)
         {
             ApiResponse result;
@@ -76,13 +77,12 @@ namespace mycocktails.api.cocktailApi.Controllers
             //
             catch (Exception ex)
             {
-                CommonFailureModel error = new CommonFailureModel
+                CommonMessageModel error = new CommonMessageModel
                 {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = "不明なエラーが発生しました",
+                    Msg = "An unknown error has occurred."
                 };
-                this.logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message}");
-                result = new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                this.logger.LogError($"{error.Msg}");
+                result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
             }
 
             this.logger.LogInformation($"StatusCode: {result.StatusCode}");
@@ -93,7 +93,7 @@ namespace mycocktails.api.cocktailApi.Controllers
             }
             else
             {
-                ApiResponse<CommonFailureModel> failureResponse = (ApiResponse<CommonFailureModel>)result;
+                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
                 return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
             }
         }
@@ -110,10 +110,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 200, type: typeof(List<CocktailModel>))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailGet()
         {
             ApiResponse result;
@@ -126,13 +126,12 @@ namespace mycocktails.api.cocktailApi.Controllers
             //
             catch (Exception ex)
             {
-                CommonFailureModel error = new CommonFailureModel
+                CommonMessageModel error = new CommonMessageModel
                 {
-                    Reason = CommonFailureModel.ReasonEnum.SYSTEMERROREnum,
-                    Msg = "不明なエラーが発生しました",
+                    Msg = "An unknown error has occurred.",
                 };
-                this.logger.LogError($"{error.Reason} : {error.Msg} / detail : {ex.Message}");
-                result = new ErrorResponse<CommonFailureModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+                this.logger.LogError($"{error.Msg}");
+                result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
             }
 
             this.logger.LogInformation($"StatusCode: {result.StatusCode}");
@@ -143,7 +142,7 @@ namespace mycocktails.api.cocktailApi.Controllers
             }
             else
             {
-                ApiResponse<CommonFailureModel> failureResponse = (ApiResponse<CommonFailureModel>)result;
+                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
                 return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
             }
         }
@@ -165,10 +164,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailPost([FromBody] CocktailDetailModel cocktailDetailModel)
         {
             return null;
@@ -187,10 +186,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/bulk_create")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailBulkCreatePost([FromBody] List<CocktailModel> cocktailModel)
         {
             return null;
@@ -214,10 +213,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/{id}")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailIdPut([FromRoute][Required] int id, [FromBody] CocktailDetailModel cocktailDetailModel)
         {
             return null;
@@ -236,10 +235,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/bulk_update")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 201, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailBulkUpdatePost([FromBody] List<CocktailModel> cocktailModel)
         {
             return null;
@@ -262,10 +261,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/{id}")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailIdDelete([FromRoute][Required] int id)
         {
             return null;
@@ -284,10 +283,10 @@ namespace mycocktails.api.cocktailApi.Controllers
         [Route("/api/v1/cocktail/cocktail/bulk_delete")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 204, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonFailureModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonFailureModel))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
         public override IActionResult CocktailBulkDeletePost([FromBody] List<int> requestBody)
         {
             return null;
