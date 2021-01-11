@@ -13,7 +13,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace mycocktails.api.cocktailApi.Models
+namespace mycocktails.library.common.Models
 {
     /// <summary>
     /// 共通応答電文

@@ -20,6 +20,7 @@ using mycocktails.api.cocktailApi.Logics.intarfaces;
 using Microsoft.Extensions.Logging;
 using mycocktails.library.common.Models;
 using System.Net;
+using CommonMessageModel = mycocktails.library.common.Models.CommonMessageModel;
 
 namespace mycocktails.api.cocktailApi.Controllers
 {
@@ -78,7 +79,7 @@ namespace mycocktails.api.cocktailApi.Controllers
             {
                 CommonMessageModel error = new CommonMessageModel
                 {
-                    Msg = "不明なエラーが発生しました"
+                    Msg = "An unknown error has occurred."
                 };
                 this.logger.LogError($"{error.Msg}");
                 result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
@@ -127,7 +128,7 @@ namespace mycocktails.api.cocktailApi.Controllers
             {
                 CommonMessageModel error = new CommonMessageModel
                 {
-                    Msg = "不明なエラーが発生しました",
+                    Msg = "An unknown error has occurred.",
                 };
                 this.logger.LogError($"{error.Msg}");
                 result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
