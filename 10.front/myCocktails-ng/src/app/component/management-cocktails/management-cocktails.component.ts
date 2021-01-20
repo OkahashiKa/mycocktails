@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { cocktail } from '../../cocktail';
-import { CocktailService } from '../../service/cocktail/cocktail.service';
+import { CocltailSelectors } from 'src/app/store/cocktail/cocktail.selectors'
+import { CocktailModel } from '@mycocktails/ng-cocktailapi-service'
+import { CocktailAction } from 'src/app/store/cocktail/cocktail.actions';
 
 @Component({
   selector: 'app-management-cocktails',
@@ -8,25 +12,25 @@ import { CocktailService } from '../../service/cocktail/cocktail.service';
   styleUrls: ['./management-cocktails.component.css']
 })
 export class ManagementCocktailsComponent implements OnInit {
+  @Select(CocltailSelectors.cocktailList) cocktailList$: Observable<CocktailModel[]>;
 
   cocktails: cocktail[];
 
   displayedColumns: string[] = ['select', 'id', 'name', 'base', 'edit'];
-  dataSource: cocktail[];
 
   constructor(
-    private cocktailService: CocktailService
+    private store: Store
   ) { }
 
   ngOnInit(): void {
-    this.cocktailService.getCocktails().
-      subscribe(cocktails => {
-        this.cocktails = cocktails
-        this.dataSource = cocktails
-      });
+    this.getCocktailList();
   }
 
-  cocktailDetail(): void {
+  getCocktailList(): void {
+    this.store.dispatch(new CocktailAction.GetCocktailList());
+  }
+
+  getCocktailDetail(): void {
     // TODO: implement cocktail detail.
   }
 
