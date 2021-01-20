@@ -8,8 +8,10 @@ import { SearchCocktailsComponent } from './component/search-cocktails/search-co
 import { ManagementMaterialsComponent } from './component/management-materials/management-materials.component';
 import { ManagementCocktailsComponent } from './component/management-cocktails/management-cocktails.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { CocktailState } from 'src/app/store/cocktail/cocktail.state'
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     ManagementCocktailsComponent,
   ],
   imports: [
+    NgxsModule.forRoot([CocktailState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

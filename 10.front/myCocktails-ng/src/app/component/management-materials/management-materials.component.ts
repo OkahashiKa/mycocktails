@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { material } from '../../material';
-import { MaterialService } from '../../service/material/material.service';
+import { MaterialService } from '../../service/api/material/material.service';
 
 @Component({
   selector: 'app-management-materials',
