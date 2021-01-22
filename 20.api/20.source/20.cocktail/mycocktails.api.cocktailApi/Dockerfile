@@ -11,11 +11,12 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 
 # Copy the code into the container
 WORKDIR /src
-COPY ["src/mycocktails.api.cocktailApi/mycocktails.api.cocktailApi.csproj", "mycocktails.api.cocktailApi/"]
+COPY ["mycocktails.api.cocktailApi.csproj", "mycocktails.api.cocktailApi/"]
+COPY ["nuget.config", "mycocktails.api.cocktailApi/"]
 
 # NuGet restore
 RUN dotnet restore "mycocktails.api.cocktailApi/mycocktails.api.cocktailApi.csproj"
-COPY ["src/mycocktails.api.cocktailApi/", "mycocktails.api.cocktailApi/"]
+COPY ["./", "mycocktails.api.cocktailApi/"]
 
 # Build the API
 WORKDIR "mycocktails.api.cocktailApi"
