@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mycocktails-db:
+    container_name: cocktails-db-container
+    build: .
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: passwd
