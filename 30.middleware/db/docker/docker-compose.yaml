@@ -8,3 +8,8 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: passwd
+      DBNAME: mycocktails_db
+      DBADMIN: mycocktails_admin
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
+    tty: true
