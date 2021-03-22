@@ -73,6 +73,7 @@ INSERT INTO t_cocktail_material  VALUES (10, 5, GETDATE(), GETDATE());
 INSERT INTO t_cocktail_material  VALUES (11, 10, GETDATE(), GETDATE());
 INSERT INTO t_cocktail_material  VALUES (11, 17, GETDATE(), GETDATE());
 
+
 -- PostgresSQL
 -- insert m_material_category deta.
 INSERT INTO m_material_category VALUES (1, 'スピッツ', NOW(), NOW());
@@ -110,40 +111,40 @@ INSERT INTO m_material VALUES (23, 'ミント', 7, NOW(), NOW());
 INSERT INTO m_material VALUES (24, 'ミルク', 7, NOW(), NOW());
 
 -- insert m_cocktail deta.
-INSERT INTO m_cocktail  VALUES (1, 'ジントニック', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (2, 'マティーニ', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (3, 'スクリュードライバー', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (4, 'モスコミュール', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (5, 'カシスソーダ', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (6, 'カシスオレンジ', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (7, 'ファジーネーブル', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (8, 'カルーアミルク', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (9, 'カーディナル', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (10, 'キール', NOW(), NOW());
-INSERT INTO m_cocktail  VALUES (11, 'スプリッツァー', NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (1, 'ジントニック', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (2, 'マティーニ', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (3, 'スクリュードライバー', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (4, 'モスコミュール', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (5, 'カシスソーダ', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (6, 'カシスオレンジ', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (7, 'ファジーネーブル', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (8, 'カルーアミルク', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (9, 'カーディナル', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (10, 'キール', null, null, NOW(), NOW());
+INSERT INTO m_cocktail  VALUES (11, 'スプリッツァー', null, null, NOW(), NOW());
 
 -- insert t_cocktail_material deta.
-INSERT INTO t_cocktail_material  VALUES (1, 1, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (1, 18, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (2, 1, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (2, 12, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (2, 22, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (3, 2, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (3, 13, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (4, 2, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (4, 15, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (4, 19, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (5, 5, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (5, 17, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (6, 5, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (6, 13, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (7, 6, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (7, 13, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (8, 8, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (8, 24, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (9, 9, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (9, 5, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (10, 10, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (10, 5, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (11, 10, NOW(), NOW());
-INSERT INTO t_cocktail_material  VALUES (11, 17, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (1, 1, 40, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (1, 18, 120, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (2, 1, 45, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (2, 12, 15, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (2, 22, 1, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (3, 2, 40, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (3, 13, 100, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (4, 2, 45, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (4, 15, 10, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (4, 19, 120, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (5, 5, 40, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (5, 17, 120, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (6, 5, 40, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (6, 13, 120, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (7, 6, 30, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (7, 13, 30, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (8, 8, 30, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (8, 24, 90, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (9, 9, 15, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (9, 5, 45, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (10, 10, 15, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (10, 5, 45, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (11, 10, 30, NOW(), NOW());
+INSERT INTO t_cocktail_material  VALUES (11, 17, 20, NOW(), NOW());

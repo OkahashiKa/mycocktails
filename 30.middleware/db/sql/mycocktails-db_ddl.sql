@@ -35,6 +35,7 @@ CREATE TABLE t_cocktail_material (
     FOREIGN KEY(material_id) REFERENCES m_material(id)
 );
 
+
 -- PostgresSQL
 CREATE TABLE m_material_category (
     id INTEGER NOT NULL,
@@ -57,6 +58,8 @@ CREATE TABLE m_material (
 CREATE TABLE m_cocktail (
     id INTEGER NOT NULL,
     name VARCHAR(100),
+    remarks VARCHAR(1000),
+    image BYTEA,
     create_at TIMESTAMP,
     update_at TIMESTAMP,
     PRIMARY KEY(id)
@@ -65,6 +68,7 @@ CREATE TABLE m_cocktail (
 CREATE TABLE t_cocktail_material (
     cocktail_id INTEGER NOT NULL,
     material_id INTEGER NOT NULL,
+    quantity INTEGER,
     create_at TIMESTAMP,
     update_at TIMESTAMP,
     PRIMARY KEY(cocktail_id, material_id),
