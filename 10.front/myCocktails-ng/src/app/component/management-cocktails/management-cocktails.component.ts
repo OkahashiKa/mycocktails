@@ -14,7 +14,7 @@ import { CocktailAction } from 'src/app/store/cocktail/cocktail.actions';
 export class ManagementCocktailsComponent implements OnInit {
   @Select(CocltailSelectors.cocktailList) cocktailList$: Observable<CocktailModel[]>;
 
-  cocktails: cocktail[];
+  cocktailList: cocktail[];
 
   displayedColumns: string[] = ['select', 'id', 'name', 'base', 'edit'];
 

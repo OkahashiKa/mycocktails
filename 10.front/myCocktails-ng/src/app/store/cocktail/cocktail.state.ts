@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Actions } from '@ngxs/store';
 import { CocktailModel } from '@mycocktails/ng-cocktailapi-service';
 import { CocktailAction } from 'src/app/store/cocktail/cocktail.actions';
-import { CocktailsApiService } from 'src/app/service/api/cocktail/cocktails-api.service';
+import { CocktailsService } from 'src/app/service/api/cocktail/cocktails-api.service';
 import { tap } from 'rxjs/operators';
 
 export class CocktailStateModel {
@@ -20,7 +20,7 @@ export class CocktailStateModel {
 @Injectable()
 export class CocktailState {
     constructor(
-        private cocktailSevice: CocktailsApiService
+        private cocktailSevice: CocktailsService
     ) {}
 
     @Action(CocktailAction.GetCocktail)

@@ -7,7 +7,7 @@ import { CocktailServiceInterface, CocktailService, CocktailModel } from '@mycoc
 @Injectable({
   providedIn: 'root'
 })
-export class CocktailsApiService {
+export class CocktailsService {
 
   private readonly BASE_PATH = environment.API_BASE_PATH + 'cocktail';
 

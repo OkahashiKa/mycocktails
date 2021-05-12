@@ -1,40 +1,40 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { material } from '../../material';
-import { MaterialService } from '../../service/api/material/material.service';
+// import { Component, OnInit, ViewChild } from '@angular/core';
+// import { CocktailsService } from '../../service/api/cocktail/cocktails-api.service';
+// import { CocktailModel } from '@mycocktails/ng-cocktailapi-service'
 
-@Component({
-  selector: 'app-search-cocktails',
-  templateUrl: './search-cocktails.component.html',
-  styleUrls: ['./search-cocktails.component.css']
-})
-export class SearchCocktailsComponent implements OnInit {
+// @Component({
+//   selector: 'app-search-cocktails',
+//   templateUrl: './search-cocktails.component.html',
+//   styleUrls: ['./search-cocktails.component.css']
+// })
+// export class SearchCocktailsComponent implements OnInit {
 
-  @ViewChild('checkMaterials') item;
-  selectedIds = []; 
-  materials: material[];
-  result: material[]; 
+//   @ViewChild('checkMaterials') item;
+//   selectedIds = []; 
+//   cocktail: CocktailModel;
+//   cocktailList: CocktailModel[]; 
 
-  constructor(
-    private materialService: MaterialService
-  ) { }
+//   constructor(
+//     private cocktailsService: CocktailsService
+//   ) { }
 
-  ngOnInit(): void {
-    this.materialService.getMaterials().
-      subscribe(materials => this.materials = materials);
-  }
+//   ngOnInit(): void {
+//     this.cocktailsService.getCocktailsList().
+//       subscribe(cocktails => this.cocktailList = cocktails);
+//   }
 
-  OnCheckboxSelect(id, event): void { 
-    if (event.target.checked === true) { 
-     this.selectedIds.push({id: id, checked: event.target.checked}); 
-     console.log('Selected Ids ', this.selectedIds); 
-    } 
-    if (event.target.checked === false) { 
-     this.selectedIds = this.selectedIds.filter((item) => item.id !== id); 
-    } 
-  }
+//   OnCheckboxSelect(id, event): void { 
+//     if (event.target.checked === true) { 
+//      this.selectedIds.push({id: id, checked: event.target.checked}); 
+//      console.log('Selected Ids ', this.selectedIds); 
+//     } 
+//     if (event.target.checked === false) { 
+//      this.selectedIds = this.selectedIds.filter((item) => item.id !== id); 
+//     } 
+//   }
 
-  serachCocktails(): void {
-    this.materialService.getMaterials().
-    subscribe(materials => this.result = materials);
-  }
-}
+//   serachCocktails(): void {
+//     this.cocktailsService.getCocktailsList().
+//     subscribe(cocktails => this.cocktailList = cocktails);
+//   }
+// }
