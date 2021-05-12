@@ -5,9 +5,14 @@ services:
     container_name: cocktails-api
     build:
       context: ./20.source/20.cocktail/mycocktails.api.cocktailApi
-    image: mycocktailsacr.azurecr.io/mycocktails/api/cocktail-api
+    image: mycocktails/api/cocktail-api
     ports:
-      - "8080:8080"
+      - ${API_PORT}:8080
     environment:
       - ASPNETCORE_ENVIRONMENT=docker
     tty: true
+    networks:
+          - mycocktails_network
+networks:
+  mycocktails_network:
+    external: true
