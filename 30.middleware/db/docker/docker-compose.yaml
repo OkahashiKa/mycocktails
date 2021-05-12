@@ -3,6 +3,7 @@ services:
   mycocktails-db:
     container_name: cocktails-db-container
     build: .
+    image: mycocktails/db/cocktail-db
     ports:
       - ${DB_PORT}:5432
     environment:
@@ -13,3 +14,8 @@ services:
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
     tty: true
+    networks:
+          - mycocktails_network
+networks:
+  mycocktails_network:
+    external: true
