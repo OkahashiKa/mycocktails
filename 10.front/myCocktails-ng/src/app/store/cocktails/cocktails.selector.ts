@@ -4,12 +4,12 @@ import { CocktailStateModel, CocktailState } from "src/app/store/cocktails/cockt
 export class CocltailSelector {
 
   @Selector([CocktailState])
-  static cocktailList(state: CocktailStateModel) {
-    return state.cocktailList;
+  static selectedCocktail(state: CocktailStateModel) {
+    return state.selectedCocktail;
   }
 
   @Selector([CocktailState])
-  static selectCocktail(state: CocktailStateModel) {
-    return state.selectedCocktails;
+  static cocktailList(state: CocktailStateModel) {
+    return state.cocktailList;
   }
 }

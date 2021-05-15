@@ -1,47 +1,54 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext, Actions } from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
+import { of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { CocktailModel } from '@mycocktails/ng-cocktailapi-service';
 import { CocktailAction } from 'src/app/store/cocktails/cocktails.action';
 import { CocktailsService } from 'src/app/service/api/cocktails/cocktails.service';
-import { tap } from 'rxjs/operators';
 
-export class CocktailStateModel {
+export interface CocktailStateModel {
+  selectedCocktail: CocktailModel;
   cocktailList: CocktailModel[];
-  selectedCocktails: CocktailModel;
 }
 
 @State<CocktailStateModel>({
-  name: 'cocktails',
+  name: 'cocktail',
   defaults: {
+    selectedCocktail: null,
     cocktailList: [],
-    selectedCocktails: null,
   },
 })
+
 @Injectable()
 export class CocktailState {
-    constructor(
-        private cocktailSevice: CocktailsService
-    ) {}
+  constructor(
+      private cocktailSevice: CocktailsService
+  ) {}
 
-    // @Action(CocktailAction.GetCocktail)
-    // getCocktail(ctx: StateContext<CocktailStateModel>, action: CocktailAction.GetCocktail) {
-    //     return this.cocktailSevice.getCocktail(action.cocktailId).pipe(
-    //         tap((result) => {
-    //             ctx.patchState({
-    //                 selectedCocktails: result
-    //             })
-    //         })
-    //     )
-    // }
+  @Action(CocktailAction.GetCocktail)
+  getCocktail(ctx: StateContext<CocktailStateModel>, action: CocktailAction.GetCocktail) {
+      return this.cocktailSevice.getCocktail(action.cocktailId).pipe(
+          tap((result) => {
+              ctx.patchState({
+                  selectedCocktail: result
+              })
+          })
+      )
+  }
 
-    // @Action(CocktailAction.GetCocktailList)
-    // getCocktilList(ctx: StateContext<CocktailStateModel>) {
-    //     return this.cocktailSevice.getCocktailsList().pipe(
-    //         tap((result) => {
-    //             ctx.patchState({
-    //                 cocktailList: result
-    //             })
-    //         })
-    //     )
-    // }
+  @Action(CocktailAction.GetCocktailList)
+  getCocktilList({ getState, setState }: StateContext<CocktailStateModel>) {
+      const state = getState();
+      return this.cocktailSevice.getCocktailsList().pipe(
+          tap(result => {
+              setState({
+                  ...state,
+                  cocktailList: result,
+              });
+          }),
+          catchError(error =>{
+              return of(error);
+          }),
+      );
+  }
 }
