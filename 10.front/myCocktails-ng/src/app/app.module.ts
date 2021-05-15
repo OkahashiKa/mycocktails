@@ -11,8 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { CocktailState } from 'src/app/store/cocktail/cocktail.state';
+import { CocktailState } from 'src/app/store/cocktails/cocktails.state';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatButtonModule,
     HttpClientModule,
+    StoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

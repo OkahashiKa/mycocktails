@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { cocktail } from '../../cocktail';
-import { CocltailSelectors } from 'src/app/store/cocktail/cocktail.selectors'
+import { CocktailsService } from 'src/app/service/api/cocktails/cocktails.service';
+import { CocltailSelector } from 'src/app/store/cocktails/cocktails.selector'
+import { CocktailAction } from 'src/app/store/cocktails//cocktails.action';
 import { CocktailModel } from '@mycocktails/ng-cocktailapi-service'
-import { CocktailAction } from 'src/app/store/cocktail/cocktail.actions';
 
 @Component({
   selector: 'app-management-cocktails',
@@ -12,14 +12,15 @@ import { CocktailAction } from 'src/app/store/cocktail/cocktail.actions';
   styleUrls: ['./management-cocktails.component.css']
 })
 export class ManagementCocktailsComponent implements OnInit {
-  @Select(CocltailSelectors.cocktailList) cocktailList$: Observable<CocktailModel[]>;
+  @Select(CocltailSelector.cocktailList) cocktailList$: Observable<CocktailModel[]>;
 
-  cocktailList: cocktail[];
+  cocktailList: CocktailModel[];
 
-  displayedColumns: string[] = ['select', 'id', 'name', 'base', 'edit'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'edit'];
 
   constructor(
-    private store: Store
+    private store: Store,
+    private cocktailsService: CocktailsService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +28,13 @@ export class ManagementCocktailsComponent implements OnInit {
   }
 
   getCocktailList(): void {
-    this.store.dispatch(new CocktailAction.GetCocktailList());
+    this.cocktailsService.getCocktailsList()
+      .subscribe
+      (
+        result => {
+          this.cocktailList = result;
+        }
+      );
   }
 
   getCocktailDetail(): void {
