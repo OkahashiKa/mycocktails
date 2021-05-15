@@ -1,8 +1,8 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { CocktailServiceInterface, CocktailService, CocktailModel } from '@mycocktails/ng-cocktailapi-service'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
