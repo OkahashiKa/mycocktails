@@ -1,7 +1,7 @@
 import { Selector } from "@ngxs/store";
-import { CocktailStateModel, CocktailState } from "src/app/store/cocktail/cocktail.state"
+import { CocktailStateModel, CocktailState } from "src/app/store/cocktails/cocktails.state"
 
-export class CocltailSelectors {
+export class CocltailSelector {
 
   @Selector([CocktailState])
   static cocktailList(state: CocktailStateModel) {
