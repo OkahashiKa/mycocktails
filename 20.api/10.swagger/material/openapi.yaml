@@ -1,0 +1,206 @@
+openapi: 3.0.1
+info:
+  title: Material API
+  description: API to manage material info.
+  contact:
+    email: okarians.302.dev@gmail.com
+  version: 0.1.0
+servers:
+  - url: 'https://release.com/api/v1'
+    description: Release server
+  - url: 'http://localhost/api/v1'
+    description: Local server
+tags:
+  - name: Create
+    description: Create API for material info.
+  - name: Get
+    description: Get API for material info.
+  - name: Update
+    description: Update API for material info.
+  - name: Delete
+    description: Delete API for material info.
+  - name: Search
+    description: Search API for material info.
+
+paths:
+  /material/{id}:
+    get:
+      tags:
+        - Get
+      summary: Get material info by id.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Material id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/MaterialId'
+      responses:
+        '200':
+          $ref: '#/components/responses/MaterialGetResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+  /material:
+    get:
+      tags:
+        - Get
+      summary: Get material info list.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/MaterialListGetResponce'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+components:
+  responses:
+    MaterialGetResponce:
+      description: Get material info response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MaterialDetailModel'
+    MaterialListGetResponce:
+      description: Get material info list response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MaterialList'
+    400Model:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+          example:
+            reason: Validation_Error
+            msg: リクエストの形式が不正です
+    401Model:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+          example:
+            reason: Authentication_ERROR
+            msg: 認証に失敗しました 
+    409Model:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+          example:
+            reason: DATA_INCONSITENCY
+            msg: データ不整合のため、突合情報検索に失敗しました
+    500Model:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+          example:
+            reason: SERVER_ERROR
+            msg: サーバーエラー
+  schemas:
+    MaterialModel:
+      description: material info model.
+      type: object
+      properties:
+        materialId:
+          $ref: '#/components/schemas/MaterialId'
+        materialName:
+          $ref: '#/components/schemas/MaterialName'
+        categoryId:
+          $ref: '#/components/schemas/CategoryId'
+        categoryName:
+          $ref: '#/components/schemas/CategoryName'
+    MaterialDetailModel:
+      description: material detail info model.
+      type: object
+      properties:
+        materialInfo:
+          $ref: '#/components/schemas/MaterialModel'
+        cocktailList:
+          $ref: '#/components/schemas/CocktailList'
+    CocktailModel:
+      description: cocktail info model.
+      type: object
+      properties:
+        cocktailId:
+          $ref: '#/components/schemas/CocktailId'
+        cocktailName:
+          $ref: '#/components/schemas/CocktailName'
+        cocktailRemarks:
+          $ref: '#/components/schemas/Remarks'
+        cocktailImage:
+          $ref: '#/components/schemas/CocktailImage'
+    MaterialList:
+      description: material info list.
+      type: array
+      items:
+        $ref: '#/components/schemas/MaterialModel'
+    CocktailList:
+      description: Cocktail info list.
+      type: array
+      items:
+        $ref: '#/components/schemas/CocktailModel'
+
+    # 以下、複数モデルで使用する共通部品
+    MaterialId:
+      description: Material id
+      type: integer
+      format: integer
+      example: 1
+    MaterialName:
+      description: Material name.
+      type: string
+      format: string
+      example: ジン
+    CategoryId:
+      description: Material category id.
+      type: integer
+      format: integer
+      example: 1
+    CategoryName:
+      description: Material category name.
+      type: string
+      format: string
+      example: スピッツ
+    CocktailId:
+      description: Cocktail id
+      type: integer
+      format: integer
+      example: 1
+    CocktailName:
+      description: Cocktail name.
+      type: string
+      format: string
+      example: ジントニック
+    Remarks:
+      description: Remarks.
+      type: string
+      format: string
+      example: 本物の男の酒
+    CocktailImage:
+      description: Cocktail image.
+      type: string
+      format: byte
+      example: /8888
+  
+security:
+  - MapManagerAuth: [] 
