@@ -12,5 +12,4 @@ Npgsql.EntityFrameworkCore.PostgreSQL \
 --output-dir ${PWD}/entity/mycocktails.library.entity/Models \
 --context MyCocktailsDBContext
 
-dotnet pack ${PWD}/entity/mycocktails.library.entity/mycocktails.library.entity.csproj \
--p:PackageVersion=${VERSION} -o ${PWD}/Package
+dotnet pack ${PWD}/common/mycocktails.library.entity/mycocktails.library.entity.csproj -p:PackageVersion=${VERSION} -o ${PWD}/Package
