@@ -9,7 +9,7 @@ namespace mycocktails.library.entity.Models
     {
         public MMaterial()
         {
-            MCocktailMaterials = new HashSet<MCocktailMaterial>();
+            TCocktailMaterials = new HashSet<TCocktailMaterial>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace mycocktails.library.entity.Models
         public DateTime? UpdateAt { get; set; }
 
         public virtual MMaterialCategory Category { get; set; }
-        public virtual ICollection<MCocktailMaterial> MCocktailMaterials { get; set; }
+        public virtual ICollection<TCocktailMaterial> TCocktailMaterials { get; set; }
     }
 }
