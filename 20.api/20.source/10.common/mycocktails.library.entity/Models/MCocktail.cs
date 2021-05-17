@@ -9,14 +9,16 @@ namespace mycocktails.library.entity.Models
     {
         public MCocktail()
         {
-            MCocktailMaterials = new HashSet<MCocktailMaterial>();
+            TCocktailMaterials = new HashSet<TCocktailMaterial>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Remarks { get; set; }
+        public byte[] Image { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
 
-        public virtual ICollection<MCocktailMaterial> MCocktailMaterials { get; set; }
+        public virtual ICollection<TCocktailMaterial> TCocktailMaterials { get; set; }
     }
 }
