@@ -14,7 +14,12 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using mycocktails.api.materialApi.Attributes;
-using mycocktails.api.materialApi.Models;
+using mycocktails.library.materialApi.Models;
+using mycocktails.api.materialApi.Logics.intarfaces;
+using Microsoft.Extensions.Logging;
+using mycocktails.library.common.Models;
+using CommonMessageModel = mycocktails.library.common.Models.CommonMessageModel;
+using System.Net;
 
 namespace mycocktails.api.materialApi.Controllers
 {
@@ -23,27 +28,24 @@ namespace mycocktails.api.materialApi.Controllers
     /// </summary>
     [ApiController]
     public class GetController : ControllerBase
-    { 
+    {
+        private readonly IGetLogic logic;
+        private readonly ILogger<GetController> logger;
+
         /// <summary>
-        /// Get material info list.
+        /// Constructor
         /// </summary>
-        /// <response code="200">Get material info list response.</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="409">Conflict</response>
-        /// <response code="500">Internal Server Error</response>
-        [HttpGet]
-        [Route("/api/v1/material")]
-        [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<MaterialModel>))]
-        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
-        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public virtual IActionResult MaterialGet()
+        /// <param name="logic">logic</param>
+        /// <param name="logger">logger</param>
+        public GetController(
+            IGetLogic logic,
+            ILogger<GetController> logger)
         {
-            return null;
+            this.logic = logic;
+            this.logger = logger;
         }
+
+        #region Get material.
 
         /// <summary>
         /// Get material info by id.
@@ -62,9 +64,92 @@ namespace mycocktails.api.materialApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public virtual IActionResult MaterialIdGet([FromRoute][Required]int id)
+        public virtual IActionResult MaterialIdGet([FromRoute][Required] int id)
         {
-            return null;
+            ApiResponse result;
+
+            try
+            {
+                result = logic.GetMaterial(id);
+            }
+
+            // catch error.
+            catch (Exception ex)
+            {
+                CommonMessageModel error = new CommonMessageModel
+                {
+                    Msg = "An unknown error has occurred."
+                };
+                this.logger.LogError($"{error.Msg}");
+                result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            this.logger.LogInformation($"StatusCode: {result.StatusCode}");
+            if (result.Success)
+            {
+                ApiResponse<MaterialDetailModel> successResponse = (ApiResponse<MaterialDetailModel>)result;
+                return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
+            }
+            else
+            {
+                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
+                return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
+            }
         }
+
+        #endregion
+
+        #region Get material list.
+
+        /// <summary>
+        /// Get material info list.
+        /// </summary>
+        /// <response code="200">Get material info list response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [Route("/api/v1/material")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 200, type: typeof(List<MaterialModel>))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
+        public virtual IActionResult MaterialGet()
+        {
+            ApiResponse result;
+
+            try
+            {
+                result = logic.GetMaterialList();
+            }
+
+            // catch error.
+            catch (Exception ex)
+            {
+                CommonMessageModel error = new CommonMessageModel
+                {
+                    Msg = "An unknown error has occurred."
+                };
+                this.logger.LogError($"{error.Msg}");
+                result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            this.logger.LogInformation($"StatusCode: {result.StatusCode}");
+            if (result.Success)
+            {
+                ApiResponse<List<MaterialModel>> successResponse = (ApiResponse<List<MaterialModel>>)result;
+                return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
+            }
+            else
+            {
+                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
+                return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
+            }
+        }
+
+        #endregion
     }
 }

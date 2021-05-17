@@ -4,6 +4,7 @@ using mycocktails.api.materialApi.Models;
 using mycocktails.library.common.Logics;
 using mycocktails.library.common.Models;
 using mycocktails.library.entity.Models;
+using mycocktails.library.materialApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,8 @@ namespace mycocktails.api.materialApi.Logics
                     {
                         CocktailId = cm.Cocktail.Id,
                         CocktailName = cm.Cocktail.Name,
-                        CocktailRemarks = cm.Cocktail.
+                        CocktailRemarks = cm.Cocktail.Remarks,
+                        CocktailImage = cm.Cocktail.Image,
                     })
                     .ToList();
 
@@ -87,7 +89,7 @@ namespace mycocktails.api.materialApi.Logics
         /// Get cocktail list logic.
         /// </summary>
         /// <returns>ApiResponse</returns>
-        public ApiResponse GetCocktailList()
+        public ApiResponse GetMaterialList()
         {
             var result = new List<MaterialModel>();
 
@@ -97,7 +99,8 @@ namespace mycocktails.api.materialApi.Logics
                 result = context.MMaterials
                     .Select(m => new MaterialModel
                     {
-                        MaterialId
+                        MaterialId = m.Id,
+                        MaterialName = m.Name,
                     })
                     .ToList();
 
@@ -116,7 +119,7 @@ namespace mycocktails.api.materialApi.Logics
                 return LogicCommonMethods.GenerateErrorResponse(ex);
             }
 
-            return new SuccessResponse<List<CocktailModel>>(HttpStatusCode.OK, result);
+            return new SuccessResponse<List<MaterialModel>>(HttpStatusCode.OK, result);
         }
 
         #endregion
