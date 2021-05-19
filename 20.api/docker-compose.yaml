@@ -1,18 +1,44 @@
 version: "3.8"
 
 services:
-  cocktail-api:
+  reverse-proxy:
+    image: nginx
+    volumes:
+      - ./30.nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - cocktails-api
+      - materials-api
+    ports:
+      - 8080:8080
+    networks:
+      - mycocktails_network
+
+  cocktails-api:
     container_name: cocktails-api
     build:
       context: ./20.source/20.cocktail/mycocktails.api.cocktailApi
-    image: mycocktails/api/cocktail-api
-    ports:
-      - ${API_PORT}:8080
+    image: mycocktails/api/cocktails-api
     environment:
       - ASPNETCORE_ENVIRONMENT=docker
     tty: true
+    ports:
+      - 7001:8080
     networks:
-          - mycocktails_network
+      - mycocktails_network
+
+  materials-api:
+    container_name: materials-api
+    build:
+      context: ./20.source/30.material/mycocktails.api.materialApi
+    image: mycocktails/api/materials-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=docker
+    tty: true
+    ports:
+      - 7002:8080
+    networks:
+      - mycocktails_network
+
 networks:
   mycocktails_network:
     external: true
