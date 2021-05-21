@@ -101,6 +101,8 @@ namespace mycocktails.api.materialApi.Logics
                     {
                         MaterialId = m.Id,
                         MaterialName = m.Name,
+                        CategoryId = m.Category.Id,
+                        CategoryName = m.Category.Name,
                     })
                     .ToList();
 
