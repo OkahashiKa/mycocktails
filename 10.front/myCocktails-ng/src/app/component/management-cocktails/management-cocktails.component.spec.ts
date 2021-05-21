@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ManagementCocktailsComponent } from './management-cocktails.component';
 
 describe('ManagementCocktailsComponent', () => {

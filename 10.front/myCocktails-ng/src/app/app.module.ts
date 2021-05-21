@@ -4,13 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './component/main/main.component';
 //import { SearchCocktailsComponent } from './component/search-cocktails/search-cocktails.component';
-//import { ManagementMaterialsComponent } from './component/management-materials/management-materials.component';
+import { ManagementMaterialsComponent } from './component/management-materials/management-materials.component';
 import { ManagementCocktailsComponent } from './component/management-cocktails/management-cocktails.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { CocktailState } from 'src/app/store/cocktails/cocktails.state';
+import { MaterialState } from 'src/app/store/materials/materials.state'
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -18,11 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     MainComponent,
     //SearchCocktailsComponent,
-    //ManagementMaterialsComponent,
+    ManagementMaterialsComponent,
     ManagementCocktailsComponent,
   ],
   imports: [
     NgxsModule.forRoot([CocktailState]),
+    NgxsModule.forRoot([MaterialState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
