@@ -1,32 +1,32 @@
 openapi: 3.0.1
 info:
-  title: Material API
+  title: Materials API
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.1.0
+  version: 0.1.1
 servers:
   - url: 'https://release.com/api/v1'
     description: Release server
   - url: 'http://localhost/api/v1'
     description: Local server
 tags:
-  - name: Create
+  - name: CreateMaterials
     description: Create API for material info.
-  - name: Get
+  - name: GetMaterials
     description: Get API for material info.
-  - name: Update
+  - name: UpdateMaterials
     description: Update API for material info.
-  - name: Delete
+  - name: DeleteMaterials
     description: Delete API for material info.
-  - name: Search
+  - name: SearchMaterials
     description: Search API for material info.
 
 paths:
-  /material/{id}:
+  /materials/{id}:
     get:
       tags:
-        - Get
+        - GetMaterials
       summary: Get material info by id.
       security:
         - bearerAuth: []
@@ -48,10 +48,10 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /material:
+  /materials:
     get:
       tags:
-        - Get
+        - GetMaterials
       summary: Get material info list.
       security:
         - bearerAuth: []
