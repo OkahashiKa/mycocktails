@@ -19,8 +19,6 @@ export class CocktailsService {
     this.cocktailService = new CocktailService(this.httpClient, this.BASE_PATH, null);
    }
 
-  //#region cocktail api.
-
   getCocktail(cocktailId: number): Observable<CocktailModel> {
     return this.cocktailService.cocktailIdGet(cocktailId);
   }
@@ -28,6 +26,4 @@ export class CocktailsService {
   getCocktailsList(): Observable<CocktailModel[]> {
     return this.cocktailService.cocktailGet();
   }
-
-  //#endregion
 }

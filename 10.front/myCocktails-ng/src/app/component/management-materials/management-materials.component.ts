@@ -1,34 +1,41 @@
-// import { Component, OnInit } from '@angular/core';
-// import { material } from '../../material';
-// // import { MaterialService } from '../../service/api/material/material.service';
+import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MaterialModel } from '@mycocktails/ng-materialapi-service';
+import { MaterialAction } from 'src/app/store/materials/materials.action';
+import { MaterialSelector } from 'src/app/store/materials/materials.selector';
 
-// @Component({
-//   selector: 'app-management-materials',
-//   templateUrl: './management-materials.component.html',
-//   styleUrls: ['./management-materials.component.css']
-// })
-// export class ManagementMaterialsComponent implements OnInit {
+@Component({
+    selector: 'app-management-materials',
+    templateUrl: './management-materials.component.html',
+    styleUrls: ['./management-materials.component.css']
+})
+export class ManagementMaterialsComponent implements OnInit {
+  @Select(MaterialSelector.materialList) materialList$: Observable<MaterialModel[]>;
 
-//   materials: material[];
+  displayedColumns: string[] = ['select', 'id', 'name', 'category', 'edit'];
 
-//   constructor(
-//     // private materialService: MaterialService
-//   ) { }
+  constructor(
+    private store: Store,
+  ) { }
 
-//   ngOnInit(): void {
-//     // this.materialService.getMaterials().
-//     //   subscribe(materials => this.materials = materials);
-//   }
+  ngOnInit(): void {
+    this.getMaterialList();
+  }
 
-//   updateMaterial(id: number): void {
-//     // TODO: implement update materials.
-//   }
+  getMaterialList(): void {
+    this.store.dispatch(new MaterialAction.GetMaterialList());
+  }
 
-//   deleteMaterial(id: number): void {
-//     // TODO: implement delete materials.
-//   }
+  updateMaterial(id: number): void {
+    // TODO: implement update materials.
+  }
 
-//   createMaterial(): void {
-//     // TODO: implement create materials.
-//   }
-// }
+  deleteMaterial(id: number): void {
+    // TODO: implement delete materials.
+  }
+
+  createMaterial(): void {
+    // TODO: implement create materials.
+  }
+}
