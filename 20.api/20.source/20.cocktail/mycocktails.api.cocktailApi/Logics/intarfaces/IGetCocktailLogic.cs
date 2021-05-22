@@ -4,9 +4,9 @@ using mycocktails.library.common.Models;
 namespace mycocktails.api.cocktailApi.Logics.intarfaces
 {
     /// <summary>
-    /// Cocktails api logic intarfase.
+    /// Get Cocktail logic intarfase.
     /// </summary>
-    public interface ICocktailLogic
+    public interface IGetCocktailLogic
     {
         /// <summary>
         /// Get cocktail logic by id.

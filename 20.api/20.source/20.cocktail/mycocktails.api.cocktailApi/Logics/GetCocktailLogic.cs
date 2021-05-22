@@ -14,19 +14,19 @@ namespace mycocktails.api.cocktailApi.Logics
     /// <summary>
     /// Cocktails api logic.
     /// </summary>
-    public class CocktailLogic : ICocktailLogic
+    public class GetCocktailLogic : IGetCocktailLogic
     {
         private readonly MyCocktailsDBContext context;
-        private readonly ILogger<CocktailLogic> logger;
+        private readonly ILogger<GetCocktailLogic> logger;
 
         /// <summary>
         /// Constractor
         /// </summary>
         /// <param name="context">DBcontext</param>
         /// <param name="logger">logger</param>
-        public CocktailLogic(
+        public GetCocktailLogic(
             MyCocktailsDBContext context,
-            ILogger<CocktailLogic> logger)
+            ILogger<GetCocktailLogic> logger)
         {
             this.context = context;
             this.logger = logger;
