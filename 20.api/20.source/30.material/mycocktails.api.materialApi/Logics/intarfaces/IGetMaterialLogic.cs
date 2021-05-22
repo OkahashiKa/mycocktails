@@ -5,7 +5,7 @@ namespace mycocktails.api.materialApi.Logics.intarfaces
     /// <summary>
     /// Get material api logic intarfase.
     /// </summary>
-    public interface IGetLogic
+    public interface IGetMaterialLogic
     {
         /// <summary>
         /// Get cocktail logic by id.

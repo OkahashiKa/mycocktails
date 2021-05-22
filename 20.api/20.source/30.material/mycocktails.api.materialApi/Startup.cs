@@ -121,7 +121,7 @@ namespace mycocktails.api.materialApi
         /// <param name="services"></param>
         private void addLogic(IServiceCollection services)
         {
-            services.AddTransient<IGetLogic, GetLogic>();
+            services.AddTransient<IGetMaterialLogic, GetMaterialLogic>();
         }
     }
 }
