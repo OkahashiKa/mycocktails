@@ -1,23 +1,22 @@
-﻿using System;
-using mycocktails.library.common.Models;
+﻿using mycocktails.library.common.Models;
 
-namespace mycocktails.api.cocktailApi.Logics.intarfaces
+namespace mycocktails.api.materialApi.Logics.intarfaces
 {
     /// <summary>
-    /// Cocktails api logic intarfase.
+    /// Get material api logic intarfase.
     /// </summary>
-    public interface ICocktailLogic
+    public interface IGetMaterialLogic
     {
         /// <summary>
         /// Get cocktail logic by id.
         /// </summary>
         /// <returns></returns>
-        public ApiResponse GetCocktail(int id);
+        public ApiResponse GetMaterial(int id);
 
         /// <summary>
         /// Get cocktail list logic.
         /// </summary>
         /// <returns></returns>
-        public ApiResponse GetCocktailList();
+        public ApiResponse GetMaterialList();
     }
 }

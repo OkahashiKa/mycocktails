@@ -60,7 +60,7 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:${CLI_VERSIO
 -c /local/build/typescript-angular.json
 
 # copy .npmrc file.
-cp build/.npmrc ./${API_NAME}/typescript-angular/.npmrc
+cp build/auth.linux.npmrc ./${API_NAME}/typescript-angular/.npmrc
 
 
 cd ./${API_NAME}/typescript-angular
@@ -68,9 +68,6 @@ cd ./${API_NAME}/typescript-angular
 # install npm package
 npm install -g npm-check-updates
 ncu -u
-sed -i -e 's/\^4.1.3/4.0.5/' package.json
-grep typescript package.json
-
 npm install
 cat package.json
 npm run build

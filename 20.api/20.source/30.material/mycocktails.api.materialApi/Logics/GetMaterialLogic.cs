@@ -15,19 +15,19 @@ namespace mycocktails.api.materialApi.Logics
     /// <summary>
     /// Get Material api logic.
     /// </summary>
-    public class GetLogic : IGetLogic
+    public class GetMaterialLogic : IGetMaterialLogic
     {
         private readonly MyCocktailsDBContext context;
-        private readonly ILogger<GetLogic> logger;
+        private readonly ILogger<GetMaterialLogic> logger;
 
         /// <summary>
         /// Constractor
         /// </summary>
         /// <param name="context">DBcontext</param>
         /// <param name="logger">logger</param>
-        public GetLogic(
+        public GetMaterialLogic(
             MyCocktailsDBContext context,
-            ILogger<GetLogic> logger)
+            ILogger<GetMaterialLogic> logger)
         {
             this.context = context;
             this.logger = logger;
@@ -101,6 +101,8 @@ namespace mycocktails.api.materialApi.Logics
                     {
                         MaterialId = m.Id,
                         MaterialName = m.Name,
+                        CategoryId = m.Category.Id,
+                        CategoryName = m.Category.Name,
                     })
                     .ToList();
 

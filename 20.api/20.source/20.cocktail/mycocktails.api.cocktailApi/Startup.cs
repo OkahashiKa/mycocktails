@@ -123,7 +123,7 @@ namespace mycocktails.api.cocktailApi
         /// <param name="services"></param>
         private void addLogic(IServiceCollection services)
         {
-            services.AddTransient<ICocktailLogic, CocktailLogic>();
+            services.AddTransient<IGetCocktailLogic, GetCocktailLogic>();
         }
     }
 }
