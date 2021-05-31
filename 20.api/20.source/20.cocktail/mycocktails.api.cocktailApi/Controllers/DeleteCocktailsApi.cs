@@ -43,7 +43,7 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult CocktailsBulkDeletePost([FromBody]List<int> requestBody)
+        public override IActionResult BulkDeletePost([FromBody]List<int> requestBody)
         { 
 
             //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -83,7 +83,7 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult CocktailsIdDelete([FromRoute][Required]int id)
+        public override IActionResult IdDelete([FromRoute][Required]int id)
         { 
 
             //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
