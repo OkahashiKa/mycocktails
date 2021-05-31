@@ -4,11 +4,11 @@ info:
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.1.1
+  version: 0.2.0
 servers:
-  - url: 'https://release.com/api/v1'
+  - url: 'https://release.com/api/v1/materials'
     description: Release server
-  - url: 'http://localhost/api/v1'
+  - url: 'http://localhost/api/v1/materials'
     description: Local server
 tags:
   - name: CreateMaterials
@@ -23,7 +23,7 @@ tags:
     description: Search API for material info.
 
 paths:
-  /materials/{id}:
+  /{id}:
     get:
       tags:
         - GetMaterials
@@ -48,7 +48,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /materials:
+  /:
     get:
       tags:
         - GetMaterials

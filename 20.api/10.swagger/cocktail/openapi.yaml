@@ -4,11 +4,11 @@ info:
   description: API to manage cocktail info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.1.4
+  version: 0.2.0
 servers:
-  - url: 'https://release.com/api/v1/'
+  - url: 'https://release.com/api/v1/cocktails'
     description: Release server
-  - url: 'http://localhost/api/v1/'
+  - url: 'http://localhost/api/v1/cocktails'
     description: Local server
 tags:
   - name: CreateCocktails
@@ -23,7 +23,7 @@ tags:
     description: Search API for cocktail info.
 
 paths:
-  /cocktails/{id}:
+  /{id}:
     get:
       tags:
         - GetCocktails
@@ -103,7 +103,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /cocktails:
+  /:
     get:
       tags:
         - GetCocktails
@@ -145,7 +145,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /cocktails/bulk_create:
+  /bulk_create:
     post:
       tags:
         - CreateCocktails
@@ -170,7 +170,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /cocktails/bulk_update:
+  /bulk_update:
     post:
       tags:
         - UpdateCocktails
@@ -195,7 +195,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /cocktails/bulk_delete:
+  /bulk_delete:
     post:
       tags:
         - DeleteCocktails
