@@ -65,7 +65,7 @@ namespace mycocktails.api.materialApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult MaterialsIdGet([FromRoute][Required] int id)
+        public override IActionResult IdGet([FromRoute][Required] int id)
         {
             ApiResponse result;
 
@@ -118,7 +118,7 @@ namespace mycocktails.api.materialApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult MaterialsGet()
+        public override IActionResult RootGet()
         {
             ApiResponse result;
 

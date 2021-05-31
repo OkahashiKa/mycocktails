@@ -44,7 +44,7 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult CocktailsBulkCreatePost([FromBody]List<CocktailModel> cocktailModel)
+        public override IActionResult BulkCreatePost([FromBody]List<CocktailModel> cocktailModel)
         { 
 
             //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -84,7 +84,7 @@ namespace mycocktails.api.cocktailApi.Controllers
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult CocktailsPost([FromBody]CocktailDetailModel cocktailDetailModel)
+        public override IActionResult RootPost([FromBody]CocktailDetailModel cocktailDetailModel)
         { 
 
             //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
