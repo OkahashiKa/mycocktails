@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { CocktailModel } from '@mycocktails/ng-cocktailapi-service';
+import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 import { CocktailAction } from 'src/app/store/cocktails/cocktails.action';
 import { CocktailsService } from 'src/app/service/api/cocktails/cocktails.service';
 

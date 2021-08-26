@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetCocktailsServiceInterface, GetCocktailsService, CocktailModel } from '@mycocktails/ng-cocktailapi-service'
+import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,21 +9,17 @@ import { environment } from 'src/environments/environment';
 })
 export class CocktailsService {
 
-  private readonly BASE_PATH = environment.API_BASE_PATH + 'cocktail';
-
-  private cocktailService: GetCocktailsServiceInterface;
+  private readonly BASE_PATH = environment.API_BASE_PATH + 'cocktails';
 
   constructor(
     private httpClient: HttpClient
-  ) {
-    this.cocktailService = new GetCocktailsService(this.httpClient, this.BASE_PATH, null);
-   }
+  ) {};
 
   getCocktail(cocktailId: number): Observable<CocktailModel> {
-    return this.cocktailService.idGet(cocktailId);
+    return this.httpClient.get<CocktailModel>(`${this.BASE_PATH}/${cocktailId}`);
   }
 
   getCocktailsList(): Observable<CocktailModel[]> {
-    return this.cocktailService.rootGet();
+    return this.httpClient.get<CocktailModel[]>(`${this.BASE_PATH}`);
   }
 }

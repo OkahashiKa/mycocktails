@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { CocktailModel } from '@mycocktails/ng-cocktailapi-service';
+import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 import { CocltailSelector } from 'src/app/store/cocktails/cocktails.selector';
 import { CocktailAction } from 'src/app/store/cocktails//cocktails.action';
 
