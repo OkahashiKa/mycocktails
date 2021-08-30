@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CocktailServiceInterface, CocktailService, CocktailModel } from '@mycocktails/ng-cocktailapi-service'
 import { environment } from 'src/environments/environment';
+import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CocktailsService {
 
-  private readonly BASE_PATH = environment.API_BASE_PATH + 'cocktail';
-
-  private cocktailService: CocktailServiceInterface;
+  private readonly BASE_PATH = environment.API_BASE_PATH + 'cocktails';
 
   constructor(
     private httpClient: HttpClient
-  ) {
-    this.cocktailService = new CocktailService(this.httpClient, this.BASE_PATH, null);
-   }
+  ) {};
 
   getCocktail(cocktailId: number): Observable<CocktailModel> {
-    return this.cocktailService.cocktailIdGet(cocktailId);
+    return this.httpClient.get<CocktailModel>(`${this.BASE_PATH}/${cocktailId}`);
   }
 
   getCocktailsList(): Observable<CocktailModel[]> {
-    return this.cocktailService.cocktailGet();
+    return this.httpClient.get<CocktailModel[]>(`${this.BASE_PATH}`);
   }
 }

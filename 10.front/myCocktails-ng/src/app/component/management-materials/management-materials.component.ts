@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { MaterialModel } from '@mycocktails/ng-materialapi-service';
-import { MaterialAction } from 'src/app/store/materials/materials.action';
+import { MaterialModel } from 'src/app/model/material/materialModel';
 import { MaterialSelector } from 'src/app/store/materials/materials.selector';
+import { MaterialAction } from 'src/app/store/materials/materials.action';
 
 @Component({
     selector: 'app-management-materials',

@@ -2,28 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { GetServiceInterface, GetService, MaterialModel, MaterialDetailModel } from '@mycocktails/ng-materialapi-service'
+import { MaterialModel } from 'src/app/model/material/materialModel';
+import { MaterialDetailModel } from 'src/app/model/material/materialDetailModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MaterialsService {
 
-  private readonly BASE_PATH = environment.API_BASE_PATH;
-
-  private getService: GetServiceInterface;
+  private readonly BASE_PATH = environment.API_BASE_PATH + 'materials';
 
   constructor(
     private httpClient: HttpClient
-  ) {
-    this.getService = new GetService(this.httpClient, this.BASE_PATH, null);
-  }
+  ) {};
 
   getMaterial(materialId: number): Observable<MaterialDetailModel> {
-    return this.getService.materialIdGet(materialId);
+    return this.httpClient.get<MaterialDetailModel>(`${this.BASE_PATH}/${materialId}`);
   }
 
   getMaterialsList(): Observable<MaterialModel[]> {
-    return this.getService.materialGet();
+    return this.httpClient.get<MaterialModel[]>(`${this.BASE_PATH}`);
   }
 }

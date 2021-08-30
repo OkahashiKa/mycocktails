@@ -1,7 +1,7 @@
 #!bin/sh
 set -e
 
-CLI_VERSION=v4.3.1
+CLI_VERSION=v5.2.0
 
 if [ $# -ne 1 ]; then
     echo "Useges: sh ./generator.sh API_NAME"
@@ -59,19 +59,23 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:${CLI_VERSIO
 --additional-properties=npmName=${NPM_NAME} \
 -c /local/build/typescript-angular.json
 
-# copy .npmrc file.
-cp build/auth.linux.npmrc ./${API_NAME}/typescript-angular/.npmrc
+# # copy .npmrc file.
+# cp build/auth.linux.npmrc ./${API_NAME}/typescript-angular/.npmrc
 
+# # copy ng-package
+# cp build/ng-package.json ./${API_NAME}/typescript-angular/ng-package.json
 
-cd ./${API_NAME}/typescript-angular
+# cd ./${API_NAME}/typescript-angular
 
-# install npm package
-npm install -g npm-check-updates
-ncu -u
-npm install
-cat package.json
-npm run build
+## install npm package
+# npm install cli-table@0.3.6
+# npm install npm-check-updates
+# ncu -u
 
-# push npm package.
-npm publish dist
+# # npm install
+# cat package.json
+# npm run build
+
+# # push npm package.
+# npm publish dist
 

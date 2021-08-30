@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { MaterialModel, MaterialDetailModel } from '@mycocktails/ng-materialapi-service';
+import { MaterialModel } from 'src/app/model/material/materialModel';
+import { MaterialDetailModel } from 'src/app/model/material/materialDetailModel';
 import { MaterialAction } from 'src/app/store/materials/materials.action';
 import { MaterialsService } from 'src/app/service/api/materials/materials.service';
 
