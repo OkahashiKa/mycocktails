@@ -24,8 +24,10 @@ import { StoreModule } from '@ngrx/store';
     ManagementCocktailsComponent,
   ],
   imports: [
-    NgxsModule.forRoot([CocktailState]),
-    NgxsModule.forRoot([MaterialState]),
+    NgxsModule.forRoot([
+      CocktailState,
+      MaterialState
+    ]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -38,7 +38,7 @@ export class MaterialState {
   }
 
   @Action(MaterialAction.GetMaterialList)
-  GetMaterialList({ getState, setState }: StateContext<MaterialStateModel>) {
+  getMaterialList({ getState, setState }: StateContext<MaterialStateModel>) {
       const state = getState();
       return this.materiallSevice.getMaterialsList().pipe(
           tap(result => {
