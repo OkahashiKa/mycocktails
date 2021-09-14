@@ -1,0 +1,30 @@
+# Api list
+## 実装予定のAPI
+|APIID|API名称|API概要|HTTPメソッド|URI|パラメータ|リクエストボディ|レスポンス|コンテナ|備考|
+|---|---|---|---|---|---|---|---|---|---|
+|AUSR001|ユーザ情報登録|ユーザ情報の登録|POST|/users|-|ユーザ情報|-|users-api||
+|AUSR002|ユーザー情報取得|ユーザ情報の取得|GET|/users/id|ユーザID|-|ユーザ情報|users-api||
+|AUSR003|ユーザ情報更新|ユーザ情報の更新|PUT|/users/id|ユーザID|ユーザ情報|-|users-api|
+|AMTL004|パスワード再発行|メールアドレスが登録済みであればパスワードを初期化しメールを送信する|POST|/users/recovery|-|メールアドレス|-|users-api||
+|AMTL005|ログイン|ログイン|POST|/users/login|-|認証情報|-|users-api||
+|AMTL006|ログアウト|ログアウト|POST|/users/logout|ユーザID|-|-|users-api||
+|AMTL001|材料情報登録|材料情報の登録|POST|/materials|-|材料情報|-|materials-api||
+|AMTL002|材料情報一括登録|材料情報の一括登録|POST|/materials/bulk_create|-|材料情報リスト|-|materials-api||
+|AMTL003|材料情報取得|材料情報の取得|GET|/materials/id|材料ID|-|材料情報|materials-api||
+|AMTL004|材料情報全件取得|材料情報の全件取得|GET|/materials|-|材料IDリスト|材料情報リスト|materials-api||
+|AMTL005|材料情報更新|材料情報の更新|PUT|/materials/id|-|材料情報|-|materials-api||
+|AMTL006|材料情報一括更新|材料情報の一括更新|POST|/materials/bulk_update|-|材料情報リスト|-|materials-api||
+|AMTL007|材料情報削除|材料情報の削除|DELETE|/materials/id|材料ID|-|-|materials-api||
+|AMTL008|材料情報一括削除|材料情報の一括削除|POST|/materials/bulk_delete|-|材料IDリスト|-|materials-api||
+|AMTL009|ユーザ材料情報登録|ユーザ材料情報の登録|POST|/user_materials|-|ユーザ材料情報|-|materials-api||
+|AMTL010|ユーザ材料情報全件取得|ユーザ材料情報の全件取得|GET|/user_materials|-|-|-|materials-api||
+|AMTL011|ユーザ材料削除|ユーザ材料の削除|DELETE|/user_materials|ユーザ材料ID|-|-|materials-api||
+|ACTL001|カクテル情報登録|カクテル情報の登録|POST|/cocktails|-|カクテル情報|-|cocktails-api||
+|ACTL002|カクテル情報一括登録|カクテル情報の一括登録|POST|/cocktails/bulk_create|-|カクテル情報リスト|-|cocktails-api||
+|ACTL003|カクテル情報取得|カクテル情報の取得|GET|/cocktails/id|カクテルID|-|カクテル情報|cocktails-api||
+|ACTL004|カクテル情報全件取得|カクテル情報の全件取得|GET|/cocktails|-|-|カクテル情報リスト|cocktails-api||
+|ACTL005|カクテル情報更新|カクテル情報の更新|PUT|/cocktails/id|カクテルID|カクテル情報|-|cocktails-api||
+|ACTL006|カクテル情報一括更新|カクテル情報の一括更新|POST|/cocktails/bulk_update|-|カクテル情報リスト|-|ccoktails-api||
+|ACTL007|カクテル情報削除|カクテル情報の削除|DELETE|cocktails/id|カクテルID|-|-|cocktails-api||
+|ACTL008|カクテル情報一括削除|カクテル情報の一括削除|POST|/cocktails/bulk_delete|-|カクテルIDリスト|-|cocktails-api||
+|ACTL009|カクテル検索|カクテルの検索|POST|/cocktails/search|-|検索条件|-|cocktails-api||
