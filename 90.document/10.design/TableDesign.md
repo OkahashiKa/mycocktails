@@ -16,29 +16,73 @@
 ``` plantuml
 @startuml
 entity "m_user" as u {
-    *id : varchar(10)
+    *id: varchar(10) *
     --
+    password: varchar(100) *
+    mail: varchar(100) *
+    role_id: integer <<FK>> *
+    favo_cocktail_id: integer <<FK>>
+    create_at: timestamp *
+    update_at: timestamp *
+}
 
+entity "m_role" as r {
+    *id: serial *
+    --
+    name: varchar(10) *
+    create_at: timestamp *
+    update_at: timestamp *
 }
 
 entity "m_material_category" as mc {
-
+    *id: serial *
+    --
+    name: varchar(100) *
+    create_at: timestamp *
+    update_at: timestamp *
 }
 
 entity "m_material" as m {
-
+    *id:  serial *
+    --
+    name: varchar(100) *
+    category_id: integer <<FK>> *
+    create_at: timestamp *
+    update_at: timestamp *
 }
 
 entity "m_cocktail" as c {
-
+    *id: serial *
+    --
+    name: varchar(100) *
+    create_at: timestamp *
+    update_at: timestamp *
 }
 
 entity "m_cocktail_recipi" as cr {
-
+    *cocktail_id: integer <<FK>> *
+    *material_id: integer <<FK>> *
+    --
+    quantity: integer *
+    create_at: timestamp *
+    update_at: timestamp *
 }
 
 entity "user_material" as um {
-
+    *user_id: integer <<FK>> *
+    *material_id: integer <<FK>> *
+    --
+    create_at: timestamp *
+    update_at: timestamp *
+    delete_at: timestamp
 }
+
+u }|..|| r
+u ||..o{ um
+m ||..o{ um
+m }|..|| mc
+m ||..o{ cr
+c ||..|{ cr
+
 @enduml
 ```
