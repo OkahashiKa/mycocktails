@@ -55,6 +55,8 @@ entity "m_cocktail" as c {
     *id: serial *
     --
     name: varchar(100) *
+    remark: varchar(1000)
+    image: bytea
     create_at: timestamp *
     update_at: timestamp *
 }
