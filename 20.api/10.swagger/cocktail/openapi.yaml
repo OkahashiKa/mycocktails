@@ -110,6 +110,13 @@ paths:
       summary: Get cocktail info list.
       security:
         - bearerAuth: []
+      requestBody:
+        description: Search cocktail info request body. (Use search case only.)
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCocktailConditionModel'
       responses:
         '200':
           $ref: '#/components/responses/CocktailListGetResponce'
@@ -227,7 +234,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CocktailModel'
+            $ref: '#/components/schemas/CocktailDetailModel'
     CocktailPostResponce:
       description: Create cocktail info response.
       content:
@@ -303,23 +310,49 @@ components:
       items:
         $ref: '#/components/schemas/CocktailModel'
     CocktailDetailModel:
+      description: Cocktail info detail model.
+      type: object
       properties:
         cocktailId:
           $ref: '#/components/schemas/CocktailId'
         cocktailName:
           $ref: '#/components/schemas/CocktailName'
         materialIdList:
-          description: Material id list.
+          $ref: '#/components/schemas/MaterialIdList'
+    SearchCocktailConditionModel:
+      description: Search cocktail info condition model.
+      type: object
+      properties:
+        searchString:
+          type: string
+          format: string
+          example: "ジントニック"
+        materialIdList:
+          $ref: '#/components/schemas/MaterialIdList'
+        materialSearchType:
+          description: cocktail search type. (AND, OR)
+          type: string
+          format: string
+          example: "AND"
+        materialCategoryList:
+          description: Cocktail category list.
           type: array
           items:
+            description: Cocktail category
             type: integer
-            description: Material id.
+            format: integer
             example: 1
+
     CocktailIdList:
       description: Cocktail id list.
       type: array
       items:
         $ref: '#/components/schemas/CocktailId'
+    MaterialIdList:
+      description: Material id list.
+      type: array
+      items:
+        $ref: '#/components/schemas/MaterialId'
 
     # 以下、複数モデルで使用する共通部品
     CocktailId:
@@ -332,6 +365,11 @@ components:
       type: string
       format: string
       example: ジントニック
+    MaterialId:
+      description: Cocktail id
+      type: integer
+      format: integer
+      example: 1
   
 security:
   - MapManagerAuth: [] 
