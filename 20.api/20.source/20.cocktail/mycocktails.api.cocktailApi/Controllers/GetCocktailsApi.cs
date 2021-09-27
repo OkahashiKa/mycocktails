@@ -100,21 +100,23 @@ namespace mycocktails.api.cocktailApi.Controllers
         /// <summary>
         /// Get cocktail info list.
         /// </summary>
+        /// <param name="searchCocktailConditionModel">Search cocktail info request body. (Use search case only.)</param>
         /// <response code="200">Get cocktail info list response.</response>
         /// <response code="400">Bad Request</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="409">Conflict</response>
         /// <response code="500">Internal Server Error</response>
         [HttpGet]
-        [Route("/api/v1/cocktails")]
+        [Route("/api/v1/cocktails/")]
+        [Consumes("application/json")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 200, type: typeof(List<CocktailModel>))]
         [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult RootGet()
-        {
+        public override IActionResult RootGet([FromBody]SearchCocktailConditionModel searchCocktailConditionModel)
+        { 
             ApiResponse result;
 
             try
