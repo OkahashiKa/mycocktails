@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace mycocktails.library.entity.Models
 {
-    public partial class MMaterialCategory
+    public partial class MRole
     {
-        public MMaterialCategory()
+        public MRole()
         {
-            MMaterials = new HashSet<MMaterial>();
+            MUsers = new HashSet<MUser>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace mycocktails.library.entity.Models
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
 
-        public virtual ICollection<MMaterial> MMaterials { get; set; }
+        public virtual ICollection<MUser> MUsers { get; set; }
     }
 }
