@@ -13,4 +13,4 @@ rm -rf Models
 dotnet restore
 
 # scafold local postgres.
-dotnet ef dbcontext scaffold "Server=localhost;Port=5432;Database=mycocktails_db;Username=postgres;Password=passwd;" Npgsql.EntityFrameworkCore.PostgreSQL -o Models --context mycocktaildbContext
+dotnet ef dbcontext scaffold "Server=localhost;Port=5432;Database=mycocktails-db;Username=postgress;Password=passwd;" Npgsql.EntityFrameworkCore.PostgreSQL -o Models --context mycocktaildbContext
