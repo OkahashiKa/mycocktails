@@ -59,12 +59,12 @@ namespace mycocktails.api.cocktailApi.Controllers
         [HttpGet]
         [Route("/api/v1/cocktails/{id}")]
         [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(CocktailModel))]
+        [ProducesResponseType(statusCode: 200, type: typeof(CocktailDetailModel))]
         [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult IdGet([FromRoute][Required] int id)
+        public override IActionResult IdGet([FromRoute(Name = "id")][Required] int id)
         {
             ApiResponse result;
 
@@ -87,12 +87,12 @@ namespace mycocktails.api.cocktailApi.Controllers
             this.logger.LogInformation($"StatusCode: {result.StatusCode}");
             if (result.Success)
             {
-                ApiResponse<CocktailModel> successResponse = (ApiResponse<CocktailModel>)result;
+                ApiResponse<CocktailDetailModel> successResponse = (ApiResponse<CocktailDetailModel>)result;
                 return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
             }
             else
             {
-                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
+                ApiResponse<CocktailDetailModel> failureResponse = (ApiResponse<CocktailDetailModel>)result;
                 return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
             }
         }
@@ -121,7 +121,7 @@ namespace mycocktails.api.cocktailApi.Controllers
 
             try
             {
-                result = logic.GetCocktailList();
+                result = logic.GetCocktailList(searchCocktailConditionModel);
             }
 
             //
