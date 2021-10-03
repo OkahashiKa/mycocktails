@@ -103,7 +103,7 @@ INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('ライ�
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('グレープフルーツジュース', 4, NOW(), NOW());
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('ソーダ', 5, NOW(), NOW());
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('トニックウォーター', 5, NOW(), NOW());
-INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('ニンジャエール', 5, NOW(), NOW());
+INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('ジンジャエール', 5, NOW(), NOW());
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('コーラ', 5, NOW(), NOW());
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('ガムシロップ', 6, NOW(), NOW());
 INSERT INTO m_material (name, category_id, create_at, update_at)VALUES ('オリーブ', 7, NOW(), NOW());
