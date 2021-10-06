@@ -4,7 +4,7 @@ info:
   description: API to manage cocktail info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.5
+  version: 0.2.6
 servers:
   - url: 'https://release.com/api/v1/cocktails'
     description: Release server
@@ -39,7 +39,7 @@ paths:
             $ref: '#/components/schemas/CocktailId'
       responses:
         '200':
-          $ref: '#/components/responses/CocktailGetResponce'
+          $ref: '#/components/responses/CocktailGetResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -70,7 +70,7 @@ paths:
               $ref: '#/components/schemas/CocktailDetailModel'
       responses:
         '201':
-          $ref: '#/components/responses/CocktailPutResponce'
+          $ref: '#/components/responses/CocktailPutResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -94,7 +94,7 @@ paths:
             $ref: '#/components/schemas/CocktailId'
       responses:
         '204':
-          $ref: '#/components/responses/CocktailDeleteResponce'
+          $ref: '#/components/responses/CocktailDeleteResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -119,7 +119,7 @@ paths:
               $ref: '#/components/schemas/SearchCocktailConditionModel'
       responses:
         '200':
-          $ref: '#/components/responses/CocktailListGetResponce'
+          $ref: '#/components/responses/CocktailListGetResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -143,7 +143,7 @@ paths:
               $ref: '#/components/schemas/CocktailDetailModel'
       responses:
         '201':
-          $ref: '#/components/responses/CocktailPostResponce'
+          $ref: '#/components/responses/CocktailPostResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -168,7 +168,7 @@ paths:
               $ref: '#/components/schemas/CocktailList'
       responses:
         '201':
-          $ref: '#/components/responses/CocktailPostResponce'
+          $ref: '#/components/responses/CocktailPostResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -193,7 +193,7 @@ paths:
               $ref: '#/components/schemas/CocktailList'
       responses:
         '201':
-          $ref: '#/components/responses/CocktailPostResponce'
+          $ref: '#/components/responses/CocktailPostResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -218,7 +218,7 @@ paths:
               $ref: '#/components/schemas/CocktailIdList'
       responses:
         '204':
-          $ref: '#/components/responses/CocktailDeleteResponce'
+          $ref: '#/components/responses/CocktailDeleteResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -227,33 +227,34 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
+
 components:
   responses:
-    CocktailGetResponce:
+    CocktailGetResponse:
       description: Get cocktail info response.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CocktailDetailModel'
-    CocktailPostResponce:
+    CocktailPostResponse:
       description: Create cocktail info response.
       content:
         application/json:
           schema:
             $ref: '../components/CommonMessageModel.yaml'
-    CocktailPutResponce:
+    CocktailPutResponse:
       description: Update cocktail info response.
       content:
         application/json:
           schema:
             $ref: '../components/CommonMessageModel.yaml'
-    CocktailDeleteResponce:
+    CocktailDeleteResponse:
       description: Delete cocktail info response.
       content:
         application/json:
           schema:
             $ref: '../components/CommonMessageModel.yaml'
-    CocktailListGetResponce:
+    CocktailListGetResponse:
       description: Get cocktail info list response.
       content:
         application/json:
