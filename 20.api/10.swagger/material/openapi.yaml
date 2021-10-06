@@ -4,7 +4,7 @@ info:
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.3
+  version: 0.2.4
 servers:
   - url: 'https://release.com/api/v1/materials'
     description: Release server
@@ -21,6 +21,8 @@ tags:
     description: Delete API for material info.
   - name: SearchMaterials
     description: Search API for material info.
+  - name: CreateUserMaterials
+    description: Create API for user material info.
 
 paths:
   /{id}:
@@ -39,7 +41,7 @@ paths:
             $ref: '#/components/schemas/MaterialId'
       responses:
         '200':
-          $ref: '#/components/responses/MaterialGetResponce'
+          $ref: '#/components/responses/MaterialGetResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -57,7 +59,7 @@ paths:
         - bearerAuth: []
       responses:
         '200':
-          $ref: '#/components/responses/MaterialListGetResponce'
+          $ref: '#/components/responses/MaterialListGetResponse'
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -66,20 +68,52 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
+  /user_material:
+    post:
+      tags:
+        - CreateUserMaterials
+      summary: Create user mterial info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Create user material info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMaterialModel'
+      responses:
+        '201':
+          $ref: "#components/responses/UserMaterialPostResponse"
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+
 components:
   responses:
-    MaterialGetResponce:
+    MaterialGetResponse:
       description: Get material info response.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/MaterialDetailModel'
-    MaterialListGetResponce:
+    MaterialListGetResponse:
       description: Get material info list response.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/MaterialList'
+    UserMaterialPostResponse:
+      description: Create user material info response.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
     400Model:
       description: Bad Request
       content:
@@ -118,7 +152,7 @@ components:
             msg: サーバーエラー
   schemas:
     MaterialModel:
-      description: material info model.
+      description: Material info model.
       type: object
       properties:
         materialId:
@@ -130,7 +164,7 @@ components:
         categoryName:
           $ref: '#/components/schemas/CategoryName'
     MaterialDetailModel:
-      description: material detail info model.
+      description: Material detail info model.
       type: object
       properties:
         materialInfo:
@@ -138,7 +172,7 @@ components:
         cocktailList:
           $ref: '#/components/schemas/CocktailList'
     CocktailModel:
-      description: cocktail info model.
+      description: Mocktail info model.
       type: object
       properties:
         cocktailId:
@@ -149,8 +183,16 @@ components:
           $ref: '#/components/schemas/Remarks'
         cocktailImage:
           $ref: '#/components/schemas/CocktailImage'
+    UserMaterialModel:
+      description: User material info model.
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/MaterialId'
+        materialId:
+          $ref: '#/components/schemas/UserId'
     MaterialList:
-      description: material info list.
+      description: Material info list.
       type: array
       items:
         $ref: '#/components/schemas/MaterialModel'
@@ -191,6 +233,11 @@ components:
       type: string
       format: string
       example: ジントニック
+    UserId:
+      description: User id.
+      type: integer
+      format: integer
+      example: 1
     Remarks:
       description: Remarks.
       type: string
