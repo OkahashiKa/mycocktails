@@ -4,7 +4,7 @@ info:
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.4
+  version: 0.2.6
 servers:
   - url: 'https://release.com/api/v1/materials'
     description: Release server
@@ -188,9 +188,9 @@ components:
       type: object
       properties:
         userId:
-          $ref: '#/components/schemas/MaterialId'
-        materialId:
           $ref: '#/components/schemas/UserId'
+        materialId:
+          $ref: '#/components/schemas/MaterialId'
     MaterialList:
       description: Material info list.
       type: array
@@ -235,9 +235,9 @@ components:
       example: ジントニック
     UserId:
       description: User id.
-      type: integer
-      format: integer
-      example: 1
+      type: string
+      format: string
+      example: username@example.com
     Remarks:
       description: Remarks.
       type: string
