@@ -4,7 +4,7 @@ info:
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.6
+  version: 0.2.7
 servers:
   - url: 'https://release.com/api/v1/materials'
     description: Release server
@@ -21,8 +21,6 @@ tags:
     description: Delete API for material info.
   - name: SearchMaterials
     description: Search API for material info.
-  - name: CreateUserMaterials
-    description: Create API for user material info.
 
 paths:
   /{id}:
@@ -71,7 +69,7 @@ paths:
   /user_material:
     post:
       tags:
-        - CreateUserMaterials
+        - CreateMaterials
       summary: Create user mterial info.
       security:
         - bearerAuth: []
@@ -85,6 +83,36 @@ paths:
       responses:
         '201':
           $ref: "#components/responses/UserMaterialPostResponse"
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
+    delete:
+      tags:
+        - DeleteMaterials
+      summary: Delete user material info.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: userId
+          description: User id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserId'
+        - in: query
+          name: materialId
+          description: Material id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/MaterialId'
+      responses:
+        '201':
+          $ref: "#components/responses/UserMaterialDeleteResponse"
         '400':
           $ref: '#/components/responses/400Model'
         '401':
@@ -110,6 +138,12 @@ components:
             $ref: '#/components/schemas/MaterialList'
     UserMaterialPostResponse:
       description: Create user material info response.
+      content:
+        application/json:
+          schema:
+            $ref: '../components/CommonMessageModel.yaml'
+    UserMaterialDeleteResponse:
+      description: Delete user material info response.
       content:
         application/json:
           schema:
