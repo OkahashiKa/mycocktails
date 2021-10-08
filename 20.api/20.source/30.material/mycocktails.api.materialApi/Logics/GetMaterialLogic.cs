@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using mycocktails.api.materialApi.Logics.intarfaces;
+using mycocktails.api.materialApi.Logics.interfaces;
 using mycocktails.library.common.Logics;
 using mycocktails.library.common.Models;
 using mycocktails.library.entity.Models;

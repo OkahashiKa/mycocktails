@@ -10,63 +10,64 @@
 
 using System;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 using mycocktails.api.materialApi.Attributes;
-using mycocktails.library.materialApi.Models;
-using mycocktails.api.materialApi.Logics.interfaces;
-using mycocktails.library.materialApi.Controllers;
-using Microsoft.Extensions.Logging;
 using mycocktails.library.common.Models;
+using mycocktails.library.materialApi.Controllers;
+using mycocktails.api.materialApi.Logics.interfaces;
+using Microsoft.Extensions.Logging;
 using CommonMessageModel = mycocktails.library.common.Models.CommonMessageModel;
 using System.Net;
 
 namespace mycocktails.api.materialApi.Controllers
 { 
     /// <summary>
-    /// Create material api controller. 
+    /// Delete material api controller.
     /// </summary>
     [ApiController]
-    public class CreateMaterialController : CreateMaterialsApiController
-    { 
-        private readonly ICreateMaterialLogic logic;
-        private readonly ILogger<CreateMaterialController> logger;
+    public class DeleteMaterialController : DeleteMaterialsApiController
+    {
+        private readonly IDeleteMaterialLogic logic;
+        private readonly ILogger<DeleteMaterialController> logger;
 
         /// <summary>
-        /// Constractor
+        /// constructoer.
         /// </summary>
         /// <param name="logic">logic</param>
         /// <param name="logger">logger</param>
-        public CreateMaterialController(
-            ICreateMaterialLogic logic,
-            ILogger<CreateMaterialController> logger)
+        public DeleteMaterialController(
+            IDeleteMaterialLogic logic,
+            ILogger<DeleteMaterialController> logger)
         {
             this.logic = logic;
             this.logger = logger;
         }
 
         /// <summary>
-        /// Create user mterial info.
+        /// Delete user material info.
         /// </summary>
-        /// <param name="userMaterialModel">Create user material info request body.</param>
+        /// <param name="userId">User id.</param>
+        /// <param name="materialId">Material id.</param>
         /// <response code="201"></response>
         /// <response code="400">Bad Request</response>
         /// <response code="401">Unauthorized</response>
         /// <response code="409">Conflict</response>
         /// <response code="500">Internal Server Error</response>
-        [HttpPost]
+        [HttpDelete]
         [Route("/api/v1/materials/user_material")]
-        [Consumes("application/json")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
         [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
-        public override IActionResult UserMaterialPost([FromBody]UserMaterialModel userMaterialModel)
-        { 
+        public override IActionResult UserMaterialDelete([FromQuery (Name = "userId")][Required()]string userId, [FromQuery (Name = "materialId")][Required()]int materialId)
+        {
             ApiResponse result;
 
             try
             {
-                result = logic.CreateUserMaterial(userMaterialModel);
+                result = logic.DeleteUserMaterial(userId, materialId);
             }
 
             // catch error.

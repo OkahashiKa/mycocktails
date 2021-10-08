@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using mycocktails.api.materialApi.Logics.intarfaces;
+using mycocktails.api.materialApi.Logics.interfaces;
 using mycocktails.library.common.Logics;
 using mycocktails.library.common.Models;
 using mycocktails.library.entity.Models;
@@ -14,19 +14,19 @@ namespace mycocktails.api.materialApi.Logics
     /// <summary>
     /// Create user material api logic.
     /// </summary>
-    public class CreateUserMaterialLogic : ICreateUserMaterialLogic
+    public class CreateMaterialLogic : ICreateMaterialLogic
     {
         private readonly MyCocktailsDBContext context;
-        private readonly ILogger<CreateUserMaterialLogic> logger;
+        private readonly ILogger<CreateMaterialLogic> logger;
 
         /// <summary>
         /// Constractor
         /// </summary>
         /// <param name="context">DBcontext</param>
         /// <param name="logger">logger</param>
-        public CreateUserMaterialLogic(
+        public CreateMaterialLogic(
             MyCocktailsDBContext context,
-            ILogger<CreateUserMaterialLogic> logger)
+            ILogger<CreateMaterialLogic> logger)
         {
             this.context = context;
             this.logger = logger;
@@ -43,6 +43,7 @@ namespace mycocktails.api.materialApi.Logics
         {
             try
             {
+                // Insert user material info.
                 context.UserMaterials.Add(new UserMaterial
                 {
                     UserId = userMaterialModel.UserId,
@@ -51,7 +52,7 @@ namespace mycocktails.api.materialApi.Logics
                     UpdateAt = DateTime.Now
                 });
 
-                // insert data.
+                // Execute query.
                 context.SaveChanges();
 
             }
