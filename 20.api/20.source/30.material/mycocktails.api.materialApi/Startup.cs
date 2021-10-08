@@ -122,6 +122,7 @@ namespace mycocktails.api.materialApi
         private void addLogic(IServiceCollection services)
         {
             services.AddTransient<IGetMaterialLogic, GetMaterialLogic>();
+            services.AddTransient<ICreateUserMaterialLogic, CreateUserMaterialLogic>();
         }
     }
 }
