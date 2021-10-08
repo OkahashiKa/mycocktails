@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using mycocktails.api.materialApi.Attributes;
 using mycocktails.library.materialApi.Models;
-using mycocktails.api.materialApi.Logics.intarfaces;
+using mycocktails.api.materialApi.Logics.interfaces;
 using mycocktails.library.materialApi.Controllers;
 using Microsoft.Extensions.Logging;
 using mycocktails.library.common.Models;

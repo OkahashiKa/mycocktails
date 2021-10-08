@@ -19,7 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using mycocktails.api.materialApi.Logics;
-using mycocktails.api.materialApi.Logics.intarfaces;
+using mycocktails.api.materialApi.Logics.interfaces;
 using mycocktails.api.materialApi.Models;
 using mycocktails.library.entity.Models;
 using Newtonsoft.Json.Converters;
@@ -122,7 +122,8 @@ namespace mycocktails.api.materialApi
         private void addLogic(IServiceCollection services)
         {
             services.AddTransient<IGetMaterialLogic, GetMaterialLogic>();
-            services.AddTransient<ICreateUserMaterialLogic, CreateUserMaterialLogic>();
+            services.AddTransient<ICreateMaterialLogic, CreateMaterialLogic>();
+            services.AddTransient<IDeleteMaterialLogic, DeleteMaterialLogic>();
         }
     }
 }
