@@ -4,7 +4,7 @@ info:
   description: API to manage cocktail info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.6
+  version: 0.2.8
 servers:
   - url: 'https://release.com/api/v1/cocktails'
     description: Release server
@@ -110,13 +110,6 @@ paths:
       summary: Get cocktail info list.
       security:
         - bearerAuth: []
-      requestBody:
-        description: Search cocktail info request body. (Use search case only.)
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SearchCocktailConditionModel'
       responses:
         '200':
           $ref: '#/components/responses/CocktailListGetResponse'
@@ -227,6 +220,31 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
+  /search:
+    post:
+      tags:
+        - SearchCocktails
+      summary: Search cocktail info.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Search cocktail info request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCocktailConditionModel'
+      responses:
+        '200':
+          $ref: '#/components/responses/SerachCocktailResponse'
+        '400':
+          $ref: '#/components/responses/400Model'
+        '401':
+          $ref: '#/components/responses/401Model'
+        '409':
+          $ref: '#/components/responses/409Model'
+        '500':
+          $ref: '#/components/responses/500Model'
 
 components:
   responses:
@@ -256,6 +274,12 @@ components:
             $ref: '../components/CommonMessageModel.yaml'
     CocktailListGetResponse:
       description: Get cocktail info list response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CocktailList'
+    SerachCocktailResponse:
+      description: Search cocktail info response.
       content:
         application/json:
           schema:
@@ -335,14 +359,6 @@ components:
           type: string
           format: string
           example: "AND"
-        materialCategoryList:
-          description: Cocktail category list.
-          type: array
-          items:
-            description: Cocktail category
-            type: integer
-            format: integer
-            example: 1
 
     CocktailIdList:
       description: Cocktail id list.
@@ -371,6 +387,3 @@ components:
       type: integer
       format: integer
       example: 1
-  
-security:
-  - MapManagerAuth: [] 
