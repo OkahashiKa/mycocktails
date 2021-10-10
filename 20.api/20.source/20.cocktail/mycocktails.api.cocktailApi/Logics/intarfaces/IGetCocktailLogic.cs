@@ -1,6 +1,4 @@
-﻿using System;
-using mycocktails.library.common.Models;
-using mycocktails.library.cocktailApi.Models;
+﻿using mycocktails.library.common.Models;
 
 namespace mycocktails.api.cocktailApi.Logics.intarfaces
 {
@@ -12,13 +10,13 @@ namespace mycocktails.api.cocktailApi.Logics.intarfaces
         /// <summary>
         /// Get cocktail logic by id.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>cocktail info.</returns>
         public ApiResponse GetCocktail(int id);
 
         /// <summary>
         /// Get cocktail list logic.
         /// </summary>
-        /// <returns></returns>
-        public ApiResponse GetCocktailList(SearchCocktailConditionModel searchCocktailCondition);
+        /// <returns>cocktail info list.</returns>
+        public ApiResponse GetCocktailList();
     }
 }

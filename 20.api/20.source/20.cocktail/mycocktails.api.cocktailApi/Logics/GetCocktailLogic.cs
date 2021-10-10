@@ -84,110 +84,28 @@ namespace mycocktails.api.cocktailApi.Logics
         /// Get cocktail list logic.
         /// </summary>
         /// <returns>ApiResponse</returns>
-        public ApiResponse GetCocktailList(SearchCocktailConditionModel searchCocktailCondition)
+        public ApiResponse GetCocktailList()
         {
             var result = new List<CocktailModel>();
 
             try
             {
-                // Get cocktail list.
-                if (searchCocktailCondition == null)
+                // Get cocktail list from DB.
+                result = context.MCocktails
+                    .Select(c => new CocktailModel
+                    {
+                        CocktailId = c.Id,
+                        CocktailName = c.Name
+                    })
+                    .ToList();
+
+                // Cocktail record not found. 
+                if (result.Count() == 0)
                 {
-                    // Get cocktail list from DB.
-                    result = context.MCocktails
-                        .Select(c => new CocktailModel
-                        {
-                            CocktailId = c.Id,
-                            CocktailName = c.Name
-                        })
-                        .ToList();
-
-                    // Cocktail record not found. 
-                    if (result.Count() == 0)
-                    {
-                        // TODO: Constantization of error messages.
-                        string msg = "There is no cocktail record.";
-                        logger.LogError($"{msg}");
-                        return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
-                    }
-                }
-
-                // Search cocktails.
-                else
-                {
-                    IQueryable<MCocktail> query = context.MCocktails;
-
-                    // SerchString
-                    if (searchCocktailCondition.SearchString != null)
-                    {
-                        query = query.Where(c => c.Name.Contains(searchCocktailCondition.SearchString));
-                    }
-
-                    // Search material id list.
-                    if (searchCocktailCondition.MaterialIdList != null)
-                    {
-                        // Get search target cocktail id.
-                        List<int> targetCocktailIdList = new List<int>();
-
-                        // Patterns to get cocktails made with current materials.
-                        if (searchCocktailCondition.MaterialSearchType == "AND")
-                        {
-                            List<int> targetCocktailIdListTmp = context.MCocktailRecipis
-                                .Where(cr =>
-                                    searchCocktailCondition.MaterialIdList.Contains(cr.MaterialId)
-                                )
-                                .Select(cr => cr.CocktailId)
-                                .Distinct()
-                                .ToList();
-
-                            foreach (var coctailId in targetCocktailIdListTmp)
-                            {
-                                var needMaterialIdList = context.MCocktailRecipis
-                                    .Where(cr => cr.CocktailId == coctailId)
-                                    .Select(cr => cr.MaterialId)
-                                    .ToList();
-
-                                // Get intersection of materials needed for a cocktail and the selected materials.
-                                var commonCocktailIdList = searchCocktailCondition.MaterialIdList.Intersect(needMaterialIdList).ToList();
-
-                                if (commonCocktailIdList.SequenceEqual(needMaterialIdList))
-                                {
-                                    // Add search target cocktail id.
-                                    targetCocktailIdList.Add(coctailId);
-                                }
-                            }
-                        }
-                        // Pattern to get cocktails related to selected materials.
-                        else
-                        {
-                            targetCocktailIdList = context.MCocktailRecipis
-                                .Where(cr =>
-                                    searchCocktailCondition.MaterialIdList.Contains(cr.MaterialId)
-                                )
-                                .Select(cr => cr.CocktailId)
-                                .Distinct()
-                                .ToList();
-                        }
-
-                        query = query.Where(c => targetCocktailIdList.Contains(c.Id));
-                    }
-
-                    result = query
-                        .Select(c => new CocktailModel
-                        {
-                            CocktailId = c.Id,
-                            CocktailName = c.Name
-                        })
-                        .ToList();
-
-                    // Cocktail record not found. 
-                    if (result.Count() == 0)
-                    {
-                        // TODO: Constantization of error messages.
-                        string msg = "There is no cocktail record.";
-                        logger.LogError($"{msg}");
-                        return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
-                    }
+                    // TODO: Constantization of error messages.
+                    string msg = "There is no cocktail record.";
+                    logger.LogError($"{msg}");
+                    return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
                 }
             }
             catch(Exception ex)
