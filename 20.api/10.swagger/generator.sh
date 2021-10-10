@@ -52,12 +52,12 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:${CLI_VERS
 --additional-properties=packageTitle=${API_NAME} \
 -c /local/build/aspnetcore.json
 
-# # generate angular package.
-# docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:${CLI_VERSION} generate \
-# -i /local/${API_NAME}/openapi.yaml -g typescript-angular -o /local/${API_NAME}/typescript-angular \
-# --additional-properties=npmVersion=${VERSION} \
-# --additional-properties=npmName=${NPM_NAME} \
-# -c /local/build/typescript-angular.json
+# generate angular package.
+docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:${CLI_VERSION} generate \
+-i /local/${API_NAME}/openapi.yaml -g typescript-angular -o /local/${API_NAME}/typescript-angular \
+--additional-properties=npmVersion=${VERSION} \
+--additional-properties=npmName=${NPM_NAME} \
+-c /local/build/typescript-angular.json
 
 # # copy .npmrc file.
 # cp build/auth.linux.npmrc ./${API_NAME}/typescript-angular/.npmrc

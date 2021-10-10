@@ -124,6 +124,7 @@ namespace mycocktails.api.cocktailApi
         private void addLogic(IServiceCollection services)
         {
             services.AddTransient<IGetCocktailLogic, GetCocktailLogic>();
+            services.AddTransient<ISearchCocktailLogic, SearchCocktailLogic>();
         }
     }
 }
