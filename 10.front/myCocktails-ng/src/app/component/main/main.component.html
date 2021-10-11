@@ -1,8 +1,18 @@
 <div>
     <h1>Top</h1>
     <app-search-user-material></app-search-user-material>
-    <button mat-raised-button class="btn btn-secondary" title="search cocktails" routerLink="/searchCocktails">Search Cocktails</button><br>
+
+    <div class="search-cocktails-button">
+        <button mat-raised-button class="btn btn-secondary" title="search cocktails" routerLink="/searchCocktails">Search Cocktails</button><br>
+    </div>
+
     <p>￬￬￬￬￬  Admin menu.  ￬￬￬￬￬</p>
-    <button mat-raised-button class="btn btn-secondary" title="edit cocktails" routerLink="/managementCocktails">Management Cocktails</button>
-    <button mat-raised-button class="btn btn-secondary" title="edit bases" routerLink="/managementMaterials">Management Materials</button>
+    
+    <div class="edit-cocktails-button">
+        <button mat-raised-button class="btn btn-secondary" title="edit cocktails" routerLink="/managementCocktails">Management Cocktails</button>
+    </div>
+    
+    <div class="edit-materials-button">
+        <button mat-raised-button class="btn btn-secondary" title="edit bases" routerLink="/managementMaterials">Management Materials</button>
+    </div>
 </div>

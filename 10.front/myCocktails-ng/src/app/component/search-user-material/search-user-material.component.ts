@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CocktailModel } from 'src/app/model/cocktail/cocktailModel'
 
 @Component({
   selector: 'app-search-user-material',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchUserMaterialComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['id', 'name'];
+
+  userCocktailList$: CocktailModel[] = [
+    {cocktailId: 1, cocktailName: "ジントニック"},
+    {cocktailId: 2, cocktailName: "マティーニ"},
+  ];
+
+  constructor()
+  {
+
+  }
 
   ngOnInit(): void {
   }
