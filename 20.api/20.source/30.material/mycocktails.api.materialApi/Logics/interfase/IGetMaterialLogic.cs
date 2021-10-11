@@ -18,5 +18,12 @@ namespace mycocktails.api.materialApi.Logics.interfaces
         /// </summary>
         /// <returns>Material info list.</returns>
         public ApiResponse GetMaterialList();
+
+        /// <summary>
+        /// Get user cocktail list logic.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <returns>User material info list.</returns>
+        public ApiResponse GetUserMaterialList(string userId);
     }
 }

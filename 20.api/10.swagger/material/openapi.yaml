@@ -4,7 +4,7 @@ info:
   description: API to manage material info.
   contact:
     email: okarians.302.dev@gmail.com
-  version: 0.2.8
+  version: 0.2.9
 servers:
   - url: 'https://release.com/api/v1/materials'
     description: Release server
@@ -66,13 +66,20 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
-  /user_material:
+  /user_material/{userId}:
     get:
       tags:
         - GetMaterials
-      summary: Get user mterial info.
+      summary: Get user mterial info by user id.
       security:
         - bearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          description: User id.
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserId'
       responses:
         '200':
           $ref: '#/components/responses/UserMaterialListGetResponse'
@@ -84,6 +91,7 @@ paths:
           $ref: '#/components/responses/409Model'
         '500':
           $ref: '#/components/responses/500Model'
+  /user_material:
     post:
       tags:
         - CreateMaterials

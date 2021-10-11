@@ -152,5 +152,59 @@ namespace mycocktails.api.materialApi.Controllers
         }
 
         #endregion
+
+        #region Get user material.
+
+        /// <summary>
+        /// Get user mterial info by user id.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <response code="200">Get user material info list response.</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="409">Conflict</response>
+        /// <response code="500">Internal Server Error</response>
+        [HttpGet]
+        [Route("/api/v1/materials/user_material/{userId}")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 200, type: typeof(List<MaterialModel>))]
+        [ProducesResponseType(statusCode: 400, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 401, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 409, type: typeof(CommonMessageModel))]
+        [ProducesResponseType(statusCode: 500, type: typeof(CommonMessageModel))]
+        public override IActionResult UserMaterialUserIdGet([FromRoute (Name = "userId")][Required]string userId)
+        { 
+            ApiResponse result;
+
+            try
+            {
+                result = logic.GetUserMaterialList(userId);
+            }
+
+            // catch error.
+            catch (Exception ex)
+            {
+                CommonMessageModel error = new CommonMessageModel
+                {
+                    Msg = "An unknown error has occurred."
+                };
+                this.logger.LogError($"{error.Msg}");
+                result = new ErrorResponse<CommonMessageModel>(HttpStatusCode.InternalServerError, error, ex.InnerException?.Message ?? ex.Message);
+            }
+
+            this.logger.LogInformation($"StatusCode: {result.StatusCode}");
+            if (result.Success)
+            {
+                ApiResponse<List<MaterialModel>> successResponse = (ApiResponse<List<MaterialModel>>)result;
+                return StatusCode((int)successResponse.StatusCode, successResponse.ResponseModel);
+            }
+            else
+            {
+                ApiResponse<CommonMessageModel> failureResponse = (ApiResponse<CommonMessageModel>)result;
+                return StatusCode((int)failureResponse.StatusCode, failureResponse.ResponseModel);
+            }
+        }
+
+        #endregion
     }
 }

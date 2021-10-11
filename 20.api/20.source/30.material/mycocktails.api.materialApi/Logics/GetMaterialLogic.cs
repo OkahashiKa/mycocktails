@@ -84,8 +84,12 @@ namespace mycocktails.api.materialApi.Logics
             return new SuccessResponse<MaterialDetailModel>(HttpStatusCode.OK, result);
         }
 
+        #endregion
+
+        #region Get material info list.
+
         /// <summary>
-        /// Get cocktail list logic.
+        /// Get material list logic.
         /// </summary>
         /// <returns>ApiResponse</returns>
         public ApiResponse GetMaterialList()
@@ -94,8 +98,59 @@ namespace mycocktails.api.materialApi.Logics
 
             try
             {
-                // Get cocktail list from DB.
+                // Get material list from DB.
                 result = context.MMaterials
+                    .Select(m => new MaterialModel
+                    {
+                        MaterialId = m.Id,
+                        MaterialName = m.Name,
+                        CategoryId = m.Category.Id,
+                        CategoryName = m.Category.Name,
+                    })
+                    .ToList();
+
+                // Cocktail record not found. 
+                if (result.Count() == 0)
+                {
+                    // TODO: Constantization of error messages.
+                    string msg = "There is no cocktail record.";
+                    logger.LogError($"{msg}");
+                    return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError((ex.InnerException == null) ? $" : {ex.Message}" : $" : {ex.Message} {Environment.NewLine} {ex.InnerException.Message}");
+                return LogicCommonMethods.GenerateErrorResponse(ex);
+            }
+
+            return new SuccessResponse<List<MaterialModel>>(HttpStatusCode.OK, result);
+        }
+
+        #endregion
+
+        #region Get user material list.
+
+        /// <summary>
+        /// Get user cocktail list logic.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <returns>User material info list.</returns>
+        public ApiResponse GetUserMaterialList(string userId)
+        {
+            var result = new List<MaterialModel>();
+
+            try
+            {
+                // Get target material id list.
+                var targetMaterialIdList = context.UserMaterials
+                    .Where(um => um.UserId == userId)
+                    .Select(um => um.MaterialId)
+                    .ToList();
+
+                // Get user material list.
+                result = context.MMaterials
+                    .Where(m => targetMaterialIdList.Contains(m.Id))
                     .Select(m => new MaterialModel
                     {
                         MaterialId = m.Id,
