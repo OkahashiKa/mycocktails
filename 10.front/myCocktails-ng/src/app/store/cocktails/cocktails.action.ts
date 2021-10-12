@@ -1,6 +1,9 @@
+import { SearchCocktailConditionModel } from 'src/app/model/cocktail/searchCocktailConditionModel';
+
 export enum CocktailActionType {
   GetCocktail = '[Cocktail] Get Cocktail',
   GetCocktailList = '[Cocktail] Get Cocktail List',
+  SearchCocktail = '[Cocktail] Search Cocktail List',
 }
 
 export namespace CocktailAction {
@@ -11,5 +14,10 @@ export namespace CocktailAction {
 
   export class GetCocktailList {
     static readonly type = CocktailActionType.GetCocktailList;
+  }
+  
+  export class SearchCocktail {
+    static readonly type = CocktailActionType.SearchCocktail;
+    constructor(public searchCocktailCondition: SearchCocktailConditionModel) {}
   }
 }

@@ -3,12 +3,13 @@ import { State, Action, StateContext } from '@ngxs/store';
 import { of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
-import { CocktailAction } from 'src/app/store/cocktails/cocktails.action';
+import { CocktailAction, CocktailActionType } from 'src/app/store/cocktails/cocktails.action';
 import { CocktailsService } from 'src/app/service/api/cocktails/cocktails.service';
 
 export interface CocktailStateModel {
   selectedCocktail: CocktailModel;
   cocktailList: CocktailModel[];
+  userCocktailList: CocktailModel[]
 }
 
 @State<CocktailStateModel>({
@@ -16,6 +17,7 @@ export interface CocktailStateModel {
   defaults: {
     selectedCocktail: null,
     cocktailList: [],
+    userCocktailList: [],
   },
 })
 
@@ -49,6 +51,15 @@ export class CocktailState {
           catchError(error =>{
               return of(error);
           }),
+      );
+  }
+
+  @Action(CocktailAction.SearchCocktail)
+  searchCocktail(ctx: StateContext<CocktailStateModel>, action: CocktailAction.SearchCocktail){
+      return this.cocktailSevice.searchCocktail(action.searchCocktailCondition).pipe(
+          tap((data) => {
+              ctx. patchState({userCocktailList: data});
+          })
       );
   }
 }

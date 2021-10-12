@@ -34,6 +34,8 @@ namespace mycocktails.api.cocktailApi
     /// </summary>
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "MycocktailsAllowSpecificOrigins";
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -88,6 +90,18 @@ namespace mycocktails.api.cocktailApi
 
             // DI Logics.
             addLogic(services);
+
+            // CORS setting.
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder => 
+                    {
+                        builder.WithOrigins("http://localhost:4200","http://localhost:8080")
+                            .AllowAnyHeader();
+                    }
+                );
+            });
         }
 
         /// <summary>
@@ -111,6 +125,10 @@ namespace mycocktails.api.cocktailApi
             app.UseStaticFiles();
 ;
             app.UseRouting();
+
+            // 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseEndpoints(endpoints =>
 	            {
 	    	        endpoints.MapControllers();

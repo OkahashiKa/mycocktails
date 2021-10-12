@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
-import { CocltailSelector } from 'src/app/store/cocktails/cocktails.selector';
+import { CocktailSelector } from 'src/app/store/cocktails/cocktails.selector';
 import { CocktailAction } from 'src/app/store/cocktails//cocktails.action';
 
 @Component({
@@ -11,7 +11,7 @@ import { CocktailAction } from 'src/app/store/cocktails//cocktails.action';
   styleUrls: ['./management-cocktails.component.css']
 })
 export class ManagementCocktailsComponent implements OnInit {
-  @Select(CocltailSelector.cocktailList) cocktailList$: Observable<CocktailModel[]>;
+  @Select(CocktailSelector.cocktailList) cocktailList$: Observable<CocktailModel[]>;
 
   displayedColumns: string[] = ['select', 'id', 'name', 'edit'];
 
