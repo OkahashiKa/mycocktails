@@ -1,12 +1,12 @@
 <h3>You can make this cocktail !!</h3>
-<div *ngIf="userMaterialList$ | async as userMaterialList">
-    <div *ngFor="let element of userMaterialList">
+<div *ngIf="userCocktailList$ | async as userCocktailList">
+    <div *ngFor="let element of userCocktailList">
         <mat-card class="example-card">
             <mat-card-header>
-                <mat-card-title>{{element.materialName}}</mat-card-title>
+                <mat-card-title>{{element.cocktailName}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <p>{{element.categoryName}}</p>
+                <p>test</p>
             </mat-card-content>
             <mat-card-actions>
             <button mat-button>Detail</button>

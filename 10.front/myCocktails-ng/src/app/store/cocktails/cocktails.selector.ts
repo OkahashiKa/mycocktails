@@ -1,7 +1,7 @@
 import { Selector } from "@ngxs/store";
 import { CocktailStateModel, CocktailState } from "src/app/store/cocktails/cocktails.state"
 
-export class CocltailSelector {
+export class CocktailSelector {
 
   @Selector([CocktailState])
   static selectedCocktail(state: CocktailStateModel) {
@@ -11,5 +11,10 @@ export class CocltailSelector {
   @Selector([CocktailState])
   static cocktailList(state: CocktailStateModel) {
     return state.cocktailList;
+  }
+
+  @Selector([CocktailState])
+  static userCocktailList(state: CocktailStateModel) {
+    return state.userCocktailList;
   }
 }

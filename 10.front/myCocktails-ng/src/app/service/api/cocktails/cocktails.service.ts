@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
+import { SearchCocktailConditionModel } from 'src/app/model/cocktail/searchCocktailConditionModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,15 @@ export class CocktailsService {
 
   getCocktailsList(): Observable<CocktailModel[]> {
     return this.httpClient.get<CocktailModel[]>(`${this.BASE_PATH}`);
+  }
+
+  searchCocktail(searchCocktailCondition: SearchCocktailConditionModel): Observable<CocktailModel[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.httpClient.post<CocktailModel[]>(`${this.BASE_PATH}/search`, searchCocktailCondition);
   }
 }

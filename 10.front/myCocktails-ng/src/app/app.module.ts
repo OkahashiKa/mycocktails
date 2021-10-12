@@ -15,7 +15,7 @@ import { CocktailState } from 'src/app/store/cocktails/cocktails.state';
 import { MaterialState } from 'src/app/store/materials/materials.state'
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { SearchUserMaterialComponent } from './component/search-user-material/search-user-material.component';
+import { SearchUserCocktailsComponent } from './component/search-user-cocktails/search-user-cocktails.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { SearchUserMaterialComponent } from './component/search-user-material/se
     //SearchCocktailsComponent,
     ManagementMaterialsComponent,
     ManagementCocktailsComponent,
-    SearchUserMaterialComponent,
+    SearchUserCocktailsComponent,
   ],
   imports: [
     NgxsModule.forRoot([

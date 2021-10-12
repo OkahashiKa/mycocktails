@@ -10,18 +10,19 @@
  * Do not edit the class manually.
  */
 
-export interface CocktailDetailModel { 
-    /**
-     * Cocktail id
-     */
-    cocktailId?: number;
-    /**
-     * cocktail name.
-     */
-    cocktailName?: string;
+
+/**
+ * Search cocktail info condition model.
+ */
+export interface SearchCocktailConditionModel { 
+    searchString?: string;
     /**
      * Material id list.
      */
     materialIdList?: Array<number>;
+    /**
+     * cocktail search type. (AND, OR)
+     */
+    materialSearchType?: string;
 }
 

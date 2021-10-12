@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchUserMaterialComponent } from './search-user-material.component';
+import { SearchUserCocktailsComponent } from './search-user-cocktails.component';
 
 describe('SearchUserMaterialComponent', () => {
-  let component: SearchUserMaterialComponent;
-  let fixture: ComponentFixture<SearchUserMaterialComponent>;
+  let component: SearchUserCocktailsComponent;
+  let fixture: ComponentFixture<SearchUserCocktailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchUserMaterialComponent ]
+      declarations: [ SearchUserCocktailsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchUserMaterialComponent);
+    fixture = TestBed.createComponent(SearchUserCocktailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
