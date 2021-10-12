@@ -10,10 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { CocktailState } from 'src/app/store/cocktails/cocktails.state';
 import { MaterialState } from 'src/app/store/materials/materials.state'
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { SearchUserMaterialComponent } from './component/search-user-material/search-user-material.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
     //SearchCocktailsComponent,
     ManagementMaterialsComponent,
     ManagementCocktailsComponent,
+    SearchUserMaterialComponent,
   ],
   imports: [
     NgxsModule.forRoot([
@@ -33,6 +36,7 @@ import { StoreModule } from '@ngrx/store';
     BrowserAnimationsModule,
     MatTableModule,
     MatButtonModule,
+    MatCardModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
   ],
