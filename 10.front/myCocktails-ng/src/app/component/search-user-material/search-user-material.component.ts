@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CocktailModel } from 'src/app/model/cocktail/cocktailModel'
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MaterialModel } from 'src/app/model/material/materialModel';
+import { MaterialAction } from 'src/app/store/materials/materials.action';
+import { MaterialSelector } from 'src/app/store/materials/materials.selector';
 
 @Component({
   selector: 'app-search-user-material',
@@ -7,20 +11,18 @@ import { CocktailModel } from 'src/app/model/cocktail/cocktailModel'
   styleUrls: ['./search-user-material.component.css']
 })
 export class SearchUserMaterialComponent implements OnInit {
+  @Select(MaterialSelector.userMaterialList) userMaterialList$: Observable<MaterialModel[]>;
 
-  displayedColumns: string[] = ['id', 'name'];
-
-  userCocktailList$: CocktailModel[] = [
-    {cocktailId: 1, cocktailName: "ジントニック"},
-    {cocktailId: 2, cocktailName: "マティーニ"},
-  ];
-
-  constructor()
-  {
-
-  }
+  constructor(
+    private store: Store,
+  ) { }
 
   ngOnInit(): void {
+    this.getUserMaterialList();
+  }
+
+  getUserMaterialList(): void {
+    this.store.dispatch(new MaterialAction.GetUserMaterialList("kazuki.okahashi"));
   }
 
 }

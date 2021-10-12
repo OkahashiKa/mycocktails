@@ -23,4 +23,8 @@ export class MaterialsService {
   getMaterialsList(): Observable<MaterialModel[]> {
     return this.httpClient.get<MaterialModel[]>(`${this.BASE_PATH}`);
   }
+
+  getUserMaterialList(userId: string): Observable<MaterialModel[]> {
+    return this.httpClient.get<MaterialModel[]>(`${this.BASE_PATH}/user_material/${userId}`);
+  }
 }
