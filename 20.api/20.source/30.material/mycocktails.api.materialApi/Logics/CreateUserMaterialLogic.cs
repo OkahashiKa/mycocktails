@@ -7,6 +7,7 @@ using mycocktails.library.entity.Models;
 using mycocktails.library.materialApi.Models;
 using System;
 using System.Net;
+using System.Linq;
 using CommonMessageModel = mycocktails.library.common.Models.CommonMessageModel;
 
 namespace mycocktails.api.materialApi.Logics
@@ -43,14 +44,32 @@ namespace mycocktails.api.materialApi.Logics
         {
             try
             {
-                // Insert user material info.
-                context.UserMaterials.Add(new UserMaterial
+                // Get material id list.
+                var materialIdList = this.context.MMaterials
+                    .Select(m => m.Id)
+                    .ToList();
+
+                var createTime = DateTime.Now;
+
+                foreach (var targetMaterialId in userMaterialModel.MaterialIdList)
                 {
-                    UserId = userMaterialModel.UserId,
-                    MaterialId = userMaterialModel.MaterialId,
-                    CreateAt = DateTime.Now,
-                    UpdateAt = DateTime.Now
-                });
+                    if (!materialIdList.Contains(targetMaterialId))
+                    {
+                        // TODO: Constantization of error messages.
+                        string msg = "Some of the target materials dose not exist.";
+                        logger.LogError($"{msg}");
+                        return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.BadRequest, msg);
+                    }
+
+                    // Insert user material info.
+                    context.UserMaterials.Add(new UserMaterial
+                    {
+                        UserId = userMaterialModel.UserId,
+                        MaterialId = targetMaterialId,
+                        CreateAt = createTime,
+                        UpdateAt = createTime
+                    });
+                }
 
                 // Execute query.
                 context.SaveChanges();
