@@ -19,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
 import { SearchUserCocktailsComponent } from './component/search-user-cocktails/search-user-cocktails.component';
 import { ManagementUserMaterialsComponent } from './component/management-user-materials/management-user-materials.component';
 import { CocktailDetailDialogComponent } from './component/dialog/cocktail-detail-dialog/cocktail-detail-dialog.component';
+import { CreateUserMaterialsComponent } from './component/create-user-materials/create-user-materials.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CocktailDetailDialogComponent } from './component/dialog/cocktail-detai
     SearchUserCocktailsComponent,
     ManagementUserMaterialsComponent,
     CocktailDetailDialogComponent,
+    CreateUserMaterialsComponent,
   ],
   imports: [
     NgxsModule.forRoot([

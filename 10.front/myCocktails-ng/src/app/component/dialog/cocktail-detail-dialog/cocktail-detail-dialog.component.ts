@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from 'src/app/component/search-user-cocktails/search-user-cocktails.component'
+import { CocktailDetailDialogData } from 'src/app/component/search-user-cocktails/search-user-cocktails.component'
 import { CocktailSelector } from 'src/app/store/cocktails/cocktails.selector';
 import { Observable } from 'rxjs';
 import { CocktailDetailModel } from 'src/app/model/cocktail/cocktailDetailModel';
@@ -18,7 +18,7 @@ export class CocktailDetailDialogComponent implements OnInit {
   constructor(
     public store: Store,
     public dialogRef: MatDialogRef<CocktailDetailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: CocktailDetailDialogData
   ) {}
 
   ngOnInit(): void {
