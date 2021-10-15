@@ -57,8 +57,8 @@ export class CocktailState {
   @Action(CocktailAction.SearchCocktail)
   searchCocktail(ctx: StateContext<CocktailStateModel>, action: CocktailAction.SearchCocktail){
       return this.cocktailSevice.searchCocktail(action.searchCocktailCondition).pipe(
-          tap((data) => {
-              ctx. patchState({userCocktailList: data});
+          tap((result) => {
+              ctx. patchState({userCocktailList: result});
           })
       );
   }

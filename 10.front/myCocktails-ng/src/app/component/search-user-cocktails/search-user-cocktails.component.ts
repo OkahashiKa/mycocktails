@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { MaterialModel } from 'src/app/model/material/materialModel';
 import { MaterialAction } from 'src/app/store/materials/materials.action';
 import { MaterialSelector } from 'src/app/store/materials/materials.selector';
@@ -8,6 +9,11 @@ import { CocktailSelector } from 'src/app/store/cocktails/cocktails.selector';
 import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 import { SearchCocktailConditionModel } from 'src/app/model/cocktail/searchCocktailConditionModel';
 import { CocktailAction } from 'src/app/store/cocktails/cocktails.action';
+import { CocktailDetailDialogComponent } from 'src/app/component/dialog/cocktail-detail-dialog/cocktail-detail-dialog.component'
+
+export interface DialogData {
+  cocktailId: number;
+}
 
 @Component({
   selector: 'app-search-user-cocktails',
@@ -20,6 +26,7 @@ export class SearchUserCocktailsComponent implements OnInit {
 
   constructor(
     private store: Store,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -37,5 +44,14 @@ export class SearchUserCocktailsComponent implements OnInit {
 
   getUserCocktail(searchCocktailCondition: SearchCocktailConditionModel): void {
     this.store.dispatch(new CocktailAction.SearchCocktail(searchCocktailCondition));
+  }
+
+  openCocktailDetailDialog(cocktailId: number) {
+    this.dialog.open(CocktailDetailDialogComponent, {
+      width: '250',
+      data: {
+        cocktailId: cocktailId
+      }
+    });
   }
 }
