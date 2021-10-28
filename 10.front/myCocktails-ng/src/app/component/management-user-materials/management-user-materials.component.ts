@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { MaterialModel } from 'src/app/model/material/materialModel';
+import { UserMaterialModel } from 'src/app/model/material/userMaterialModel';
+import { MaterialsService } from 'src/app/service/api/materials/materials.service';
 import { MaterialAction } from 'src/app/store/materials/materials.action';
 import { MaterialSelector } from 'src/app/store/materials/materials.selector';
 import { CreateUserMaterialsComponent } from '../create-user-materials/create-user-materials.component';
@@ -21,9 +24,13 @@ export class ManagementUserMaterialsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'category', 'delete'];
 
+  materialList: MaterialModel[];
+  materialIdList: number[];
+
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private materialService: MaterialsService
   ) { }
 
   ngOnInit(): void {
@@ -34,12 +41,19 @@ export class ManagementUserMaterialsComponent implements OnInit {
     this.store.dispatch(new MaterialAction.GetUserMaterialList("kazuki.okahashi"));
   }
 
-  openAddUserMaterialDialog() {
-    this.dialog.open(CreateUserMaterialsComponent, {
+  openCreateUserMaterialDialog() {
+    const dialogRef = this.dialog.open(CreateUserMaterialsComponent, {
       width: '250',
       data: {
         userId: "kazuki.okahashi"
       }
     });
+
+    dialogRef.afterClosed().pipe(
+      tap(result => alert('登録が完了しました。')),
+      catchError(error =>{
+        return of(error);
+      })
+    ).subscribe();
   }
 }

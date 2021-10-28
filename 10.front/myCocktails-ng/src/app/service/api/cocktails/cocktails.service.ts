@@ -31,6 +31,6 @@ export class CocktailsService {
       })
     };
 
-    return this.httpClient.post<CocktailModel[]>(`${this.BASE_PATH}/search`, searchCocktailCondition);
+    return this.httpClient.post<CocktailModel[]>(`${this.BASE_PATH}/search`, searchCocktailCondition, httpOptions);
   }
 }
