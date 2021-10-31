@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CocktailState } from 'src/app/store/cocktails/cocktails.state';
 import { MaterialState } from 'src/app/store/materials/materials.state'
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +22,8 @@ import { StoreModule } from '@ngrx/store';
 import { SearchUserCocktailsComponent } from './component/search-user-cocktails/search-user-cocktails.component';
 import { ManagementUserMaterialsComponent } from './component/management-user-materials/management-user-materials.component';
 import { CocktailDetailDialogComponent } from './component/dialog/cocktail-detail-dialog/cocktail-detail-dialog.component';
-import { CreateUserMaterialsComponent } from './component/create-user-materials/create-user-materials.component';
+import { CreateUserMaterialDialogComponent } from './component/create-user-material-dialog/create-user-material-dialog.component';
+import { CreateUserMaterialConfirmDialogComponent } from './component/create-user-material-confirm-dialog/create-user-material-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { CreateUserMaterialsComponent } from './component/create-user-materials/
     SearchUserCocktailsComponent,
     ManagementUserMaterialsComponent,
     CocktailDetailDialogComponent,
-    CreateUserMaterialsComponent,
+    CreateUserMaterialDialogComponent,
+    CreateUserMaterialConfirmDialogComponent,
   ],
   imports: [
     NgxsModule.forRoot([
@@ -49,6 +52,7 @@ import { CreateUserMaterialsComponent } from './component/create-user-materials/
     MatDialogModule,
     MatListModule,
     MatPaginatorModule,
+    MatSnackBarModule,
     HttpClientModule,
     StoreModule.forRoot({}, {}),
   ],

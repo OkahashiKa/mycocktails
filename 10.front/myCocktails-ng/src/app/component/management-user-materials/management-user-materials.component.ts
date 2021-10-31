@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Select, Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { MaterialModel } from 'src/app/model/material/materialModel';
-import { UserMaterialModel } from 'src/app/model/material/userMaterialModel';
-import { MaterialsService } from 'src/app/service/api/materials/materials.service';
 import { MaterialAction } from 'src/app/store/materials/materials.action';
 import { MaterialSelector } from 'src/app/store/materials/materials.selector';
-import { CreateUserMaterialsComponent } from '../create-user-materials/create-user-materials.component';
+import { CreateUserMaterialDialogComponent } from 'src/app/component/create-user-material-dialog/create-user-material-dialog.component';
 
 export interface CreateUserMaterialDialogData {
   userId: string;
@@ -30,7 +28,7 @@ export class ManagementUserMaterialsComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
-    private materialService: MaterialsService
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -42,18 +40,26 @@ export class ManagementUserMaterialsComponent implements OnInit {
   }
 
   openCreateUserMaterialDialog() {
-    const dialogRef = this.dialog.open(CreateUserMaterialsComponent, {
-      width: '250',
-      data: {
-        userId: "kazuki.okahashi"
+    const dialogRef = this.dialog.open(CreateUserMaterialDialogComponent,
+      {
+        width: '250',
+        data: {
+          userId: "kazuki.okahashi"
+        }
       }
-    });
+    );
 
-    dialogRef.afterClosed().pipe(
-      tap(result => alert('登録が完了しました。')),
-      catchError(error =>{
-        return of(error);
-      })
-    ).subscribe();
+    dialogRef.afterClosed().subscribe(result => 
+      {
+        if(result != null)
+        {
+          this.snackBar.open(result, 'Close', {
+            duration: 5000,
+            verticalPosition: "bottom",
+            horizontalPosition: "start"
+          });
+        }
+      }
+    )
   }
 }

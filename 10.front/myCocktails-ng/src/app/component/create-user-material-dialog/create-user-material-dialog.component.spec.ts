@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateUserMaterialsComponent } from './create-user-materials.component';
+import { CreateUserMaterialDialogComponent } from './create-user-material-dialog.component';
 
 describe('CreateUserCocktailsComponent', () => {
-  let component: CreateUserMaterialsComponent;
-  let fixture: ComponentFixture<CreateUserMaterialsComponent>;
+  let component: CreateUserMaterialDialogComponent;
+  let fixture: ComponentFixture<CreateUserMaterialDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateUserMaterialsComponent ]
+      declarations: [ CreateUserMaterialDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateUserMaterialsComponent);
+    fixture = TestBed.createComponent(CreateUserMaterialDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
