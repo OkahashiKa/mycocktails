@@ -10,25 +10,25 @@
             </td>
         </ng-container>
 
-        <!-- id Column -->
+        <!-- Id column -->
         <ng-container matColumnDef="id" class="table-column">
             <th mat-header-cell *matHeaderCellDef> No </th>
             <td mat-cell *matCellDef="let element"> {{element.materialId}} </td>
         </ng-container>
 
-        <!-- name Column -->
+        <!-- Name column -->
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> name </th>
             <td mat-cell *matCellDef="let element"> {{element.materialName}} </td>
         </ng-container>
 
-        <!-- name Column -->
+        <!-- category column -->
         <ng-container matColumnDef="category">
             <th mat-header-cell *matHeaderCellDef> category </th>
             <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
         </ng-container>
 
-        <!-- edit button Column -->
+        <!-- Edit button column -->
         <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef class="table-edit"></th>
             <td mat-cell *matCellDef="let element" class="table-edit">

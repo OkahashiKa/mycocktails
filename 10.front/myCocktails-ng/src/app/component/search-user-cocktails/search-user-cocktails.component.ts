@@ -9,9 +9,9 @@ import { CocktailSelector } from 'src/app/store/cocktails/cocktails.selector';
 import { CocktailModel } from 'src/app/model/cocktail/cocktailModel';
 import { SearchCocktailConditionModel } from 'src/app/model/cocktail/searchCocktailConditionModel';
 import { CocktailAction } from 'src/app/store/cocktails/cocktails.action';
-import { CocktailDetailDialogComponent } from 'src/app/component/dialog/cocktail-detail-dialog/cocktail-detail-dialog.component'
+import { CocktailDetailDialogComponent } from 'src/app/component/dialog/cocktail-detail-dialog/cocktail-detail-dialog.component';
 
-export interface DialogData {
+export interface CocktailDetailDialogData {
   cocktailId: number;
 }
 

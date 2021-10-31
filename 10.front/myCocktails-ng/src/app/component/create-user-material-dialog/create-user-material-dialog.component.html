@@ -1,0 +1,23 @@
+
+<h1 mat-dialog-title>Create User Materials</h1>
+<div mat-dialog-content>
+    <p>Which material would you like to add?</p>
+    <div *ngIf="materialList$ | async as materialList" class="show-material-area">
+        <mat-list *ngFor="let material of materialList | slice: startIndex : endIndex">
+            <mat-list-item (click)="selectMaterial(material)">{{material.materialName}}</mat-list-item>
+        </mat-list>
+        <div *ngFor="let material of selectedMaterial">
+            {{material.materialName}}
+        </div>
+        <mat-paginator 
+            [length]="length" 
+            [pageSize]="perPage" 
+            (page)="getPaginatorData($event)" 
+        >
+        </mat-paginator>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button (click)="createUserMaterials()">Create</button>
+</div>

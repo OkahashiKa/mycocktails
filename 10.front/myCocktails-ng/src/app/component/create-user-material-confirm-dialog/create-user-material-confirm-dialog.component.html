@@ -1,0 +1,8 @@
+<p>{{data.confirmTitle}}</p>
+<div *ngIf="data.confirmContent">
+    <mat-list *ngFor="let contentName of data.confirmContent">
+        <mat-list-item>{{contentName}}</mat-list-item>
+    </mat-list>
+</div>
+<button mat-button (click)="onClickOk()">OK</button>
+<button mat-button (click)="onClickCancel()">Cancel</button>
