@@ -1,8 +1,12 @@
-<p>{{data.confirmTitle}}</p>
-<div *ngIf="data.confirmContent">
+<div *ngIf="data.confirmContent[0]; else noContent">
+    <p>{{data.confirmTitle}}</p>
     <mat-list *ngFor="let contentName of data.confirmContent">
         <mat-list-item>{{contentName}}</mat-list-item>
     </mat-list>
+    <button mat-button (click)="onClickOk()">OK</button>
+    <button mat-button (click)="onClickCancel()">Cancel</button>
 </div>
-<button mat-button (click)="onClickOk()">OK</button>
-<button mat-button (click)="onClickCancel()">Cancel</button>
+<ng-template #noContent>
+    <p>Please select content.</p>
+    <button mat-button (click)="onClickCancel()">OK</button>
+</ng-template>
