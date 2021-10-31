@@ -23,11 +23,13 @@ export class CreateUserMaterialConfirmDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // OK
   onClickOk(){
     this.confirmResult = true;
     this.dialogRef.close(this.confirmResult);
   }
 
+  // Cancel
   onClickCancel(){
     this.dialogRef.close();
   }
