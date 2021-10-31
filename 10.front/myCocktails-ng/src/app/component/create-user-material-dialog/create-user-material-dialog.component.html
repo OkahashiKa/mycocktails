@@ -2,8 +2,8 @@
 <h1 mat-dialog-title>Create User Materials</h1>
 <div mat-dialog-content>
     <p>Which material would you like to add?</p>
-    <div *ngIf="materialList$ | async as materialList" class="show-material-area">
-        <mat-list *ngFor="let material of materialList | slice: startIndex : endIndex">
+    <div *ngIf="unRegisteredMaterial" class="show-material-area">
+        <mat-list *ngFor="let material of unRegisteredMaterial | slice: startIndex : endIndex">
             <mat-list-item (click)="selectMaterial(material)">{{material.materialName}}</mat-list-item>
         </mat-list>
         <div *ngFor="let material of selectedMaterial">
