@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MaterialModel } from 'src/app/model/material/materialModel';
 import { MaterialAction } from 'src/app/store/materials/materials.action';
 import { MaterialSelector } from 'src/app/store/materials/materials.selector';
 import { CreateUserMaterialDialogComponent } from 'src/app/component/create-user-material-dialog/create-user-material-dialog.component';
+import { MaterialsService } from 'src/app/service/api/materials/materials.service';
+import { catchError, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-management-user-materials',
@@ -23,6 +25,7 @@ export class ManagementUserMaterialsComponent implements OnInit {
 
   constructor(
     private store: Store,
+    private materialService: MaterialsService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
@@ -64,5 +67,32 @@ export class ManagementUserMaterialsComponent implements OnInit {
         }
       }
     )
+  }
+
+  // delete user material
+  deleteUserMaterial(materialId: number) {
+    // call delete user material api.
+    this.materialService.deleteUserMaterial("kazuki.okahashi", materialId).pipe(
+      tap(result => {
+        // open sucssece snack bar.
+        this.snackBar.open(result.msg, 'Close', {
+          duration: 5000,
+          verticalPosition: "bottom",
+          horizontalPosition: "start"
+        });
+
+        // Get user material again. 
+        this.getUserMaterialList();
+      }),
+      catchError(error =>{
+        // open error snack bar.
+        this.snackBar.open(error, 'Close', {
+          duration: 5000,
+          verticalPosition: "bottom",
+          horizontalPosition: "start"
+        });
+        return of(error);
+      })
+    ).subscribe();
   }
 }

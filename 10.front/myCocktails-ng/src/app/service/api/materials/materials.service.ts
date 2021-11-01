@@ -40,4 +40,8 @@ export class MaterialsService {
 
     return this.httpClient.post<CommonMessageModel>(`${this.BASE_PATH}/user_material`, userMaterial, httpOptions);
   }
+
+  deleteUserMaterial(userId: string, materialId: number): Observable<CommonMessageModel> {
+    return this.httpClient.delete<CommonMessageModel>(`${this.BASE_PATH}/user_material?userId=${userId}&materialId=${materialId}`);
+  }
 }
