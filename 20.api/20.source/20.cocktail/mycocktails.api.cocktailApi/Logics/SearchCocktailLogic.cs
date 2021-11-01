@@ -77,9 +77,13 @@ namespace mycocktails.api.cocktailApi.Logics
                                 .ToList();
 
                             // Get intersection of materials needed for a cocktail and the selected materials.
-                            var commonCocktailIdList = searchCocktailCondition.MaterialIdList.Intersect(needMaterialIdList).ToList();
+                            var commonMaterialIdList = searchCocktailCondition.MaterialIdList.Intersect(needMaterialIdList).ToList();
 
-                            if (commonCocktailIdList.SequenceEqual(needMaterialIdList))
+                            // Sort 
+                            commonMaterialIdList.Sort();
+                            needMaterialIdList.Sort();
+
+                            if (commonMaterialIdList.SequenceEqual(needMaterialIdList))
                             {
                                 // Add search target cocktail id.
                                 targetCocktailIdList.Add(coctailId);
