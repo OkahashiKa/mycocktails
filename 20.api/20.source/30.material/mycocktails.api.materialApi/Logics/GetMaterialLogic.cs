@@ -159,15 +159,6 @@ namespace mycocktails.api.materialApi.Logics
                         CategoryName = m.Category.Name,
                     })
                     .ToList();
-
-                // Cocktail record not found. 
-                if (result.Count() == 0)
-                {
-                    // TODO: Constantization of error messages.
-                    string msg = "There is no cocktail record.";
-                    logger.LogError($"{msg}");
-                    return LogicCommonMethods.GenerateErrorResponse(HttpStatusCode.NotFound, msg);
-                }
             }
             catch (Exception ex)
             {
