@@ -46,10 +46,10 @@ export class CreateUserMaterialDialogComponent implements OnInit {
     taskList.push(this.store.dispatch(new MaterialAction.GetMaterialList()));
     taskList.push(this.store.dispatch(new MaterialAction.GetUserMaterialList(this.data.userId)));
 
-    forkJoin(taskList).subscribe(resultList => {
+    forkJoin(taskList).subscribe(result => {
       this.getUnregisteredMaterial();
+      this.getDataSize();
     });
-    this.getDataSize();
   }
 
   // Get unregistered user material.
