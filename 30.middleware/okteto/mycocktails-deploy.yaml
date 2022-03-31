@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycoctalis-cocktails-db
+spec:
+  selector:
+    matchLabels:
+      app: myccoktails-db
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: myccoktails-db
+    spec:
+      containers:
+        - name: cocktails-db
+          image: registry.cloud.okteto.net/okahashika/my-db:v1.0
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+          ports:
+            - containerPort: 5432
